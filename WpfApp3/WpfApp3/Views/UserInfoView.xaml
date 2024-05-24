@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="WpfApp3.Views.UserInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp3"
+             xmlns:conv="clr-namespace:WpfApp3.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200">
+    
+    <UserControl.Resources>
+        <conv:ErrMsgConverter x:Key="errMsgConverter"/>
+
+        <Style x:Key="errLabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="{Binding SetErrLabelColor}"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="xUserId" Grid.Row="0" Grid.Column="0" Margin="10,5" Padding="10,5"
+                     Text="{Binding UserID}" FontSize="16" Foreground="#ff424242"
+                     TextAlignment="Left"
+                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                     TextChanged="TextBox_TextChanged"/>
+            
+            <PasswordBox x:Name="xUserPassword" Grid.Row="1" Grid.Column="0" Margin="10,5" Padding="10,5"
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                         PasswordChar="●"  
+                         PasswordChanged="PasswordBox_PasswordChanged"/>
+
+            <Button x:Name="xLogInBtn" Grid.Row="2" Grid.Column="0" Margin="10,5"
+                    Content="로그인" 
+                    Command="{Binding LogInCommand}"/>
+
+            <Label x:Name="xErrMsg" Grid.Row="3" Grid.Column="0" Margin="10,5"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   Content="카카오 계정 또는 비밀번호를 다시 확인해 주세요"
+                   Style="{StaticResource errLabelStyle}"
+                   Visibility="Hidden">
+                <!--<Label.Content>
+                    <MultiBinding Converter="{StaticResource errMsgConverter}">
+                        <Binding ElementName="xUserId" Path="Text" />
+                        <Binding ElementName="xLogInBtn" Path="Content" />
+                    </MultiBinding>
+                </Label.Content>-->
+            </Label>
+        </Grid>
+        <!--<GroupBox Header="GroupBox"/>-->
+
+    </Grid>
+</UserControl>

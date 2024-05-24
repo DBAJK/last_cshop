@@ -1,0 +1,149 @@
+﻿<Window x:Class="WpfApp3.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3.Views"
+        mc:Ignorable="d" Title="LoginWindow"
+        Height="800" Width="1200">
+    <Grid>
+        <!-- 로그인 화면 -->
+        <Grid x:Name="xLoginView">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.2*"/>
+                </Grid.RowDefinitions>
+
+
+                <Image Source="../Image/tino.png" Width="260" Grid.Row="0"/>
+                <StackPanel Grid.Row="1">
+                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16">아이디</TextBlock>
+                    <TextBox x:Name="xUserId" Margin="0 4 0 10" Padding="10"
+                        FontSize="16" Foreground="#ff424242"
+                        TextAlignment="Left"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left" Width="400" Height="60"
+                        Text="{Binding UserID}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16">비밀번호</TextBlock>
+                    <PasswordBox x:Name="xUserPwd" Grid.Row="2" Padding="10" Margin="0 4 0 10"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60"
+                        PasswordChanged="xUserPwd_PasswordChanged"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3" Margin="0 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0"
+                        Content="로그인" Width="400" Height="60" Cursor="Hand" Margin="0 5 0 5"
+                        Command="{Binding LoginCommand}" Foreground="White" Background="#378CE7"/>
+                    <!--="Button_Click"-->
+                    <TextBlock Grid.Row="1" Text="회원가입" VerticalAlignment="Center" 
+                               HorizontalAlignment="Center" Foreground="LightBlue"
+                               TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- 로그인 화면 -->
+
+        <!-- 회원가입 화면 -->
+        <Grid x:Name="xSignUpView" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Width="80" Height="35" Margin="40 0 0 0" Command="{Binding MoveLoginCommand}">
+                    이전화면
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock 
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    FontSize="30" Margin="0 30 0 0">
+                    회원가입
+                </TextBlock>
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock HorizontalAlignment="Center" Margin="360 0 0 0" FontSize="16">이름</TextBlock>
+                    <TextBox x:Name="xRegUserName" Padding="10" Margin="0 4 0 10"
+                        FontSize="16" Foreground="#ff424242"
+                        TextAlignment="Left"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left" Width="400" Height="60"
+                        Text="{Binding RegUserName}"/>
+                <!--TextChanged="xRegUserName_TextChanged"/>-->
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16">아이디</TextBlock>
+                    <TextBox x:Name="xRegUserId"  Padding="10" Margin="0 4 0 10"
+                        FontSize="16" Foreground="#ff424242"
+                        TextAlignment="Left"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left" Width="400" Height="60"
+                        Text="{Binding RegUserID}"/>
+                    <!--TextChanged="xRegUserId_TextChanged"/>-->
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16">비밀번호</TextBlock>
+                    <PasswordBox x:Name="xRegUserPwd" Padding="10" Margin="0 4 0 10"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60" 
+                        PasswordChanged="xRegUserPwdChk_PasswordChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4">
+                    <TextBlock HorizontalAlignment="Center" Margin="294 0 0 0" FontSize="16">비밀번호 확인</TextBlock>
+                    <PasswordBox x:Name="xRegUserPwdChk" Padding="10" Margin="0 4 0 10"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60" 
+                        PasswordChanged="xRegUserPwdChk_PasswordChanged_1"/>
+                </StackPanel>
+
+                <Button Grid.Row="5" 
+                    Content="회원가입" Width="400" Height="60" Cursor="Hand"
+                    Foreground="White" Background="#378CE7" Command="{Binding SignUpCommand}"/>
+            </Grid>
+        </Grid>
+        <!-- 회원가입 화면 -->
+    </Grid>
+</Window>

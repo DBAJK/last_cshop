@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="WpfApp3.Views.SettingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3.Views"
+        mc:Ignorable="d" Height="800" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Width="60" Height="30" 
+                        Margin="0 0 20 0" Content="이전화면" Click="Button_Click"
+                        Cursor="Hand"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        정렬기준
+                    </TextBlock>
+
+                    <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Margin="0 0 20 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <RadioButton Grid.Column="0" GroupName="Option" IsChecked="True">이름</RadioButton>
+                        <RadioButton Grid.Column="1" GroupName="Option">진행도</RadioButton>
+                        <RadioButton Grid.Column="2" GroupName="Option">정확도</RadioButton>
+                        <RadioButton Grid.Column="3" GroupName="Option">오타수</RadioButton>
+                        <RadioButton Grid.Column="4" GroupName="Option">걸린시간</RadioButton>
+                        <RadioButton Grid.Column="5" GroupName="Option">등록날짜</RadioButton>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="1" Background="Gray" Margin="0 0 20 0">
+                        </TextBlock>
+                        <RadioButton Grid.Column="1" GroupName="Order" IsChecked="True" HorizontalAlignment="Center">오름차순</RadioButton>
+                        <RadioButton Grid.Column="2" GroupName="Order" HorizontalAlignment="Center">내림차순</RadioButton>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RecordList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"></TextBlock>
+                                <TextBlock Grid.Column="1"></TextBlock>
+                                <TextBlock Grid.Column="2"></TextBlock>
+                                <TextBlock Grid.Column="3"></TextBlock>
+                                <TextBlock Grid.Column="4"></TextBlock>
+                                <TextBlock Grid.Column="5"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

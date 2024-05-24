@@ -1,0 +1,21 @@
+﻿<Page x:Class="WpfApp3.Views.KakaoAPI"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3.Views"
+      xmlns:view="clr-namespace:WpfApp3.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="839" d:DesignWidth="1448"
+      Title="KakaoAPI">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="316,17,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
+        <Label Content="검색" HorizontalAlignment="Left" Margin="34,17,0,0" VerticalAlignment="Top" Width="48" Height="26"/>
+        <TextBox HorizontalAlignment="Left" Margin="88,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="26" TextChanged="TextBox_TextChanged"/>
+        <WebBrowser Margin="10,68,28,27" Source="https://dbajk.github.io/c_API_kakao/"/>
+
+    </Grid>
+</Page>
