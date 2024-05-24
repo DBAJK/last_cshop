@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-C:\Users\jgkim\Downloads\WpfApp3\WpfApp3\obj\Debug\
+D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\
 WpfApp3
 none
 false
 DEBUG;TRACE
-C:\Users\jgkim\Downloads\WpfApp3\WpfApp3\App.xaml
+D:\project\GIT\WpfApp3\WpfApp3\App.xaml
 9-489229801
 
-232114477557
-202062890702
+25-756111490
+201211576932
 MainWindow.xaml;Views\FriendInfoView.xaml;Views\KakaoAPI.xaml;Window\LoginView.xaml;Window\MainView.xaml;Views\SettingView.xaml;Views\SignUpView.xaml;Views\TypingListView.xaml;Views\UserInfoView.xaml;
 
-True
+False
 

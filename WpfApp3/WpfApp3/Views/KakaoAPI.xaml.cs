@@ -17,6 +17,10 @@ using WpfApp3.Handler;
 using WpfApp3.DB;
 using WpfApp3.ENCRYPTION;
 using WpfApp3.Model;
+using System.IO;
+using System.Net;
+using System.Windows.Forms;
+
 
 namespace WpfApp3.Views
 {
@@ -38,6 +42,25 @@ namespace WpfApp3.Views
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBox.SelectedIndex != -1)
+            {
+                return;
+            }
+            Locale ml = listBox.SelectedItem as Locale;
+            object[] pos = new object[] { ml.Lat, ml.Lng };
+            HtmlDocument hdoc = webBrowser.Document;
+            hdoc.InvokeScript("setCenter", pos);
         }
     }
 }

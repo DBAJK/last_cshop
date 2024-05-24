@@ -15,7 +15,9 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="316,17,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
         <Label Content="검색" HorizontalAlignment="Left" Margin="34,17,0,0" VerticalAlignment="Top" Width="48" Height="26"/>
         <TextBox HorizontalAlignment="Left" Margin="88,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="26" TextChanged="TextBox_TextChanged"/>
-        <WebBrowser Margin="10,68,28,27" Source="https://dbajk.github.io/c_API_kakao/"/>
+        <WebBrowser Margin="316,65,28,10" Source="https://dbajk.github.io/c_API_kakao/" x:Name="WebBrowser"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,55,1151,81" SelectionChanged="ListBox_SelectionChanged"/>
+        <Button Content="뒤로가기" HorizontalAlignment="Left" Margin="45,785,0,0" VerticalAlignment="Top" Height="30" Width="217" Click="Button_Click"/>
 
     </Grid>
 </Page>

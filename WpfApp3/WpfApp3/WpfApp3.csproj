@@ -87,6 +87,8 @@
     <Compile Include="GlobalVariable.cs" />
     <Compile Include="Handler\RelayCommand.cs" />
     <Compile Include="Handler\Notifier.cs" />
+    <Compile Include="KakaoAPI.cs" />
+    <Compile Include="Locale.cs" />
     <Compile Include="Model\FriendInfo.cs" />
     <Compile Include="Model\LoginInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
