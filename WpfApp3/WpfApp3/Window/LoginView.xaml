@@ -22,25 +22,22 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="1.2*"/>
                 </Grid.RowDefinitions>
-
-
-                <Image Source="../Image/tino.png" Width="260" Grid.Row="0"/>
                 <StackPanel Grid.Row="1">
-                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16">아이디</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16" Foreground="#FF378CE7">아이디</TextBlock>
                     <TextBox x:Name="xUserId" Margin="0 4 0 10" Padding="10"
-                        FontSize="16" Foreground="#ff424242"
+                        FontSize="24" Foreground="#ff424242"
                         TextAlignment="Left"
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
                         HorizontalContentAlignment="Left" Width="400" Height="60"
-                        Text="{Binding UserID}"/>
+                        Text="{Binding UserID}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
-                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16">비밀번호</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16" Foreground="#FF378CE7">비밀번호</TextBlock>
                     <PasswordBox x:Name="xUserPwd" Grid.Row="2" Padding="10" Margin="0 4 0 10"
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
                         HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60"
-                        PasswordChanged="xUserPwd_PasswordChanged"/>
+                        PasswordChanged="xUserPwd_PasswordChanged" FontSize="24"/>
                 </StackPanel>
 
                 <Grid Grid.Row="3" Margin="0 0 0 0">
@@ -53,10 +50,11 @@
                         Content="로그인" Width="400" Height="60" Cursor="Hand" Margin="0 5 0 5"
                         Command="{Binding LoginCommand}" Foreground="White" Background="#378CE7"/>
                     <!--="Button_Click"-->
-                    <TextBlock Grid.Row="1" Text="회원가입" VerticalAlignment="Center" 
+                    <TextBlock Grid.Row="1" Text="회원가입" VerticalAlignment="Top" 
                                HorizontalAlignment="Center" Foreground="LightBlue"
-                               TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand"/>
+                               TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Margin="0,2,0,0"/>
                 </Grid>
+                <Label Content="LOGIN" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top" Width="328" Height="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" Foreground="#FF378CE7" FontFamily="Arial Black"/>
             </Grid>
         </Grid>
         <!-- 로그인 화면 -->
@@ -84,7 +82,7 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -109,7 +107,7 @@
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
                         HorizontalContentAlignment="Left" Width="400" Height="60"
                         Text="{Binding RegUserName}"/>
-                <!--TextChanged="xRegUserName_TextChanged"/>-->
+                    <!--TextChanged="xRegUserName_TextChanged"/>-->
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">

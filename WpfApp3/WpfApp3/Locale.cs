@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp3
 {
-    internal class Locale
+    /*internal class Locale
     {
         public string Name { get; set; }
         public double Lat { get; set; }
@@ -24,5 +24,5 @@ namespace WpfApp3
             return Name;
         }
 
-    }
+    }*/
 }

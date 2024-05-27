@@ -95,7 +95,7 @@
     <Compile Include="Views\FriendInfoView.xaml.cs">
       <DependentUpon>FriendInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\KakaoAPI.xaml.cs">
+    <Compile Include="Window\KakaoAPI.xaml.cs">
       <DependentUpon>KakaoAPI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window\LoginView.xaml.cs">
@@ -132,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\KakaoAPI.xaml">
+    <Page Include="Window\KakaoAPI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

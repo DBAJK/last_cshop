@@ -176,7 +176,7 @@ namespace WpfApp3.Views
 
                 GlobalVariable.Instance().userInfo = UserInfo;
 
-                new MainView().Show();
+                new KakaoAPI().Show();
 
                 _View.Close();
             }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp3
 {
-    public class KakaoAPI
+    /*public class KakaoAPI
     {
         public static List<Locale> Search(string text)
         {
@@ -42,5 +42,5 @@ namespace WpfApp3
             }
             return list;
         }
-    }
+    }*/
 }

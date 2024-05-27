@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\project\GIT\WpfApp3\WpfApp3\App.xaml
-9-489229801
+9-1806856707
 
-232114477557
+24-306017766
 201211576932
-MainWindow.xaml;Views\FriendInfoView.xaml;Views\KakaoAPI.xaml;Window\LoginView.xaml;Window\MainView.xaml;Views\SettingView.xaml;Views\SignUpView.xaml;Views\TypingListView.xaml;Views\UserInfoView.xaml;
+MainWindow.xaml;Views\FriendInfoView.xaml;Window\KakaoAPI.xaml;Window\LoginView.xaml;Window\MainView.xaml;Views\SettingView.xaml;Views\SignUpView.xaml;Views\TypingListView.xaml;Views\UserInfoView.xaml;
 
-True
+False
 

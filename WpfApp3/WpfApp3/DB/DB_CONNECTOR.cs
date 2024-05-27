@@ -18,9 +18,9 @@ namespace WpfApp3.DB
         {
             string dbServer = "127.0.0.1";
             string port = "3306";
-            string dbDatabase = "tino_db";
+            string dbDatabase = "cproject";
             string dbUid = "root";
-            string dbPwd = "root";
+            string dbPwd = "1234";
             string dbSslMode = "none";
             string Conn = "Server=" + dbServer + ";" + "Port=" + port + ";" + "Database=" + dbDatabase + ";" + "Uid=" + dbUid + ";" + "Pwd=" + dbPwd + ";" + "SslMode=" + dbSslMode;
             return Conn;
@@ -35,7 +35,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // user_seq 조회
-                    string sql1 = "select COALESCE(max(user_seq), 0) + 1 from user_info;";
+                    string sql1 = "select COALESCE(max(user_seq), 0) + 1 from members;";
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
@@ -45,13 +45,13 @@ namespace WpfApp3.DB
                     rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
 
                     // 데이터 임시 등록
-                    string sql2 = "insert into user_info values('"+userId+"','"+userPwd+"', '"+userName+"', "+ user_seq + ");";
+                    string sql2 = "insert into members values('" + userId+"','"+userPwd+"', '"+userName+"', "+ user_seq + ");";
                     MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                     cmd2.ExecuteNonQuery();
                     MessageBox.Show("입력 성공");
 
                     // Mysql DB Table 값 가져오기
-                    string sql3 = "select * from user_info";
+                    string sql3 = "select * from members";
                     MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
                     MySqlDataReader rdr = cmd3.ExecuteReader();
 
@@ -85,7 +85,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "select count(*) from user_info where user_id = '"+userId+"';";
+                    string sql1 = "select count(*) from members where user_id = '" + userId+"';";
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
@@ -114,16 +114,18 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "select COALESCE(user_name, ''), COALESCE(user_seq, '') from user_info where user_id = '" + userId + "' and user_pwd = '" + userPwd + "';";
+                    string sql1 = "select * from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
 
-                    string user_name = rdr1[0].ToString();
+                    /*string user_name = rdr1[0].ToString();
                     string user_seq = rdr1[1].ToString();
 
                     login[0] = user_name;
-                    login[1] = user_seq;   
+                    login[1] = user_seq;  
+                    
+                     COALESCE(sequence_id, '')*/
 
                     conn.Close();   // 연결 종료
                 }
@@ -142,7 +144,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "update user_info set user_name = '"+userName+"' where user_seq = "+userSeq;
+                    string sql1 = "update members set user_name = '" + userName+"' where sequence_id = "+userSeq;
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행

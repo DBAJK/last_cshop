@@ -19,7 +19,7 @@ using WpfApp3.ENCRYPTION;
 using WpfApp3.Model;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 
 namespace WpfApp3.Views
@@ -27,19 +27,14 @@ namespace WpfApp3.Views
     /// <summary>
     /// KakaoAPI.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class KakaoAPI : Page
+    public partial class KakaoAPI
     {
         public KakaoAPI()
         {
             InitializeComponent();
         }
 
-        internal void Show()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /*private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
@@ -49,18 +44,18 @@ namespace WpfApp3.Views
 
         }
 
-        
+
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listBox.SelectedIndex != -1)
-            {
-                return;
-            }
-            Locale ml = listBox.SelectedItem as Locale;
-            object[] pos = new object[] { ml.Lat, ml.Lng };
-            HtmlDocument hdoc = webBrowser.Document;
-            hdoc.InvokeScript("setCenter", pos);
-        }
+            *//*  if (listBox.SelectedIndex != -1)
+              {
+                  return;
+              }
+              Locale ml = listBox.SelectedItem as Locale;
+              object[] pos = new object[] { ml.Lat, ml.Lng };
+              HtmlDocument hdoc = webBrowser.Document;
+              hdoc.InvokeScript("setCenter", pos);*//*
+        }*/
     }
 }
