@@ -5,12 +5,12 @@ using WpfApp3.Handler;
 
 namespace WpfApp3.Views
 {
-    public class UserInfoViewModel : Notifier
+/*    public class UserInfoViewModel : Notifier
     {
         private string ID { get; set; }
         private string Password { get; set; }
 
-        /*
+        *//*
         private Brush _SetErrLabelColor;
         public Brush SetErrLabelColor
         {
@@ -21,7 +21,7 @@ namespace WpfApp3.Views
                 OnPropertyChange("SetErrLabelColor");
             }
         }
-        */
+        *//*
 
         private UserInfoView _View;
         public UserInfoViewModel(UserInfoView view) 
@@ -143,5 +143,5 @@ namespace WpfApp3.Views
                 //ViewModel.UserPasswordLen = passwordBox.Password.Length;
             }
         }
-    }
+    }*/
 }

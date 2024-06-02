@@ -25,7 +25,6 @@ namespace WpfApp3.Views
         private string Password { get; set; }
 
         private LoginView _View;
-        private MainView _Main;
 
         // 로그인화면 -> 로그인 버튼 바인딩
         private RelayCommand _LoginCommand;
@@ -143,18 +142,21 @@ namespace WpfApp3.Views
             }
         }
 
-        private string _RegUserPasswordChk;
-        public string RegUserPasswordChk
+        /*private string _RegUserPassword;
+        public string RegUserPassword
         {
             get
             {
-                return _RegUserPasswordChk;
+                return _RegUserPassword;
             }
             set
             {
-                _RegUserPasswordChk = value;
+                _RegUserPassword = value;
+                RegPasswordLen = value.Length;
             }
-        }
+        }*/
+
+        
         // 회원가입 변수
 
         //private RelayCommand _LogInCommand;
@@ -228,19 +230,14 @@ namespace WpfApp3.Views
             {
                 errMsg = "이름은 2자 이상 20자 이하로 입력해주세요.";
             }
-            else if (RegIDLen < 8 || RegIDLen > 10) // 아이디 검증
+            else if (RegIDLen < 6 || RegIDLen > 10) // 아이디 검증
             {
-                errMsg = "아이디는 8자 이상 10자 이하로 입력해주세요.";
+                errMsg = "아이디는 6자 이상 10자 이하로 입력해주세요.";
             }
-            else if (RegPasswordLen < 8 || RegPasswordLen > 10) // 비밀번호 검증
+            else if (RegPasswordLen < 6 || RegPasswordLen > 10) // 비밀번호 검증
             {
-                errMsg = "비밀번호는 8자 이상 10자 이하로 입력해주세요.";
+                errMsg = "비밀번호는 6자 이상 10자 이하로 입력해주세요.";
             }
-            else if (RegUserPassword != RegUserPasswordChk) // 비밀번호, 비밀번호 확인 값 검증
-            {
-                errMsg = "비밀번호가 일치하지 않습니다.";
-            }
-
             return errMsg;
         }
         // 회원가입화면 -> 화원가입 버튼 클릭시 호출 이벤트
@@ -251,7 +248,6 @@ namespace WpfApp3.Views
             RegUserName = "";
             RegUserID = "";
             _View.xRegUserPwd.Password = "";
-            _View.xRegUserPwdChk.Password = "";
 
             _View.xLoginView.Visibility = Visibility.Visible;
             _View.xSignUpView.Visibility = Visibility.Hidden;
@@ -275,10 +271,10 @@ namespace WpfApp3.Views
             DB_CONNECTOR db = new DB_CONNECTOR();
 
             // 비밀번호는 암호화 후 전달
-            SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
+/*            SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
             string pwdStr = sha256.Connect(UserPassword);
-
-            _userInfo = db.userLoginChk(UserID, pwdStr);
+*/
+            _userInfo = db.userLoginChk(UserID, UserPassword);
 
             return _userInfo[0].Length > 0;
         }
@@ -293,11 +289,23 @@ namespace WpfApp3.Views
     {
         public LoginViewModel ViewModel = null;
 
+        class ComboBoxEmailAddList
+        {
+            public List<string> EmailAddList { get; set; } = new List<string>()
+            {
+                "naver.com",
+                "gmail.com",
+                "daum.net"
+            };
+        }
+
         public LoginView()
         {
             InitializeComponent();
+            
             ViewModel = new LoginViewModel(this);
             this.DataContext = ViewModel;
+            //DataContext = new ComboBoxEmailAddList();
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -305,6 +313,13 @@ namespace WpfApp3.Views
             xLoginView.Visibility = Visibility.Hidden;
             xSignUpView.Visibility = Visibility.Visible;
         }
+
+        private void TextBlock1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            xLoginView.Visibility = Visibility.Hidden;
+            xSignUpView.Visibility = Visibility.Visible;
+        }
+
         private void xUserId_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ViewModel == null) return;
@@ -365,7 +380,7 @@ namespace WpfApp3.Views
             if (sender != null)
             {
                 PasswordBox passwordBox = sender as PasswordBox;
-                ViewModel.RegUserPasswordChk = passwordBox.Password;
+                //ViewModel.RegUserPasswordChk = passwordBox.Password;
                 //ViewModel.UserPasswordLen = passwordBox.Password.Length;
             }
         }

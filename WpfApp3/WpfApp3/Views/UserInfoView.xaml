@@ -15,7 +15,7 @@
             <Setter Property="Foreground" Value="{Binding SetErrLabelColor}"/>
         </Style>
     </UserControl.Resources>
-    
+    <!-- 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
@@ -53,15 +53,15 @@
                    Content="카카오 계정 또는 비밀번호를 다시 확인해 주세요"
                    Style="{StaticResource errLabelStyle}"
                    Visibility="Hidden">
-                <!--<Label.Content>
+                <Label.Content>
                     <MultiBinding Converter="{StaticResource errMsgConverter}">
                         <Binding ElementName="xUserId" Path="Text" />
                         <Binding ElementName="xLogInBtn" Path="Content" />
                     </MultiBinding>
-                </Label.Content>-->
+                </Label.Content>
             </Label>
         </Grid>
-        <!--<GroupBox Header="GroupBox"/>-->
-
+        <GroupBox Header="GroupBox"/>
     </Grid>
+    -->
 </UserControl>

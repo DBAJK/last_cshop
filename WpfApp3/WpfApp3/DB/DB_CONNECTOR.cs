@@ -105,7 +105,7 @@ namespace WpfApp3.DB
         // 로그인 검증
         public string[] userLoginChk(string userId, string userPwd)
         {
-            string[] login = { "", ""};
+            string[] login = {"", ""};
 
             try
             {
@@ -114,20 +114,21 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "select * from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
+                    string sql1 = "select user_name, sequence_id from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
+
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
 
-                    /*string user_name = rdr1[0].ToString();
+                    string user_name = rdr1[0].ToString();
                     string user_seq = rdr1[1].ToString();
 
                     login[0] = user_name;
-                    login[1] = user_seq;  
-                    
-                     COALESCE(sequence_id, '')*/
+                    login[1] = user_seq;
 
-                    conn.Close();   // 연결 종료
+                    //COALESCE(sequence_id, '');
+
+                    rdr1.Close();   // 연결 종료
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

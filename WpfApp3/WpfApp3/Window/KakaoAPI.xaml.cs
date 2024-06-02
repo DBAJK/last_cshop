@@ -48,14 +48,14 @@ namespace WpfApp3.Views
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            *//*  if (listBox.SelectedIndex != -1)
-              {
-                  return;
-              }
-              Locale ml = listBox.SelectedItem as Locale;
-              object[] pos = new object[] { ml.Lat, ml.Lng };
-              HtmlDocument hdoc = webBrowser.Document;
-              hdoc.InvokeScript("setCenter", pos);*//*
+            if (listBox.SelectedIndex != -1)
+            {
+                return;
+            }
+            Locale ml = listBox.SelectedItem as Locale;
+            object[] pos = new object[] { ml.Lat, ml.Lng };
+            HtmlDocument hdoc = webBrowser.Document;
+            hdoc.InvokeScript("setCenter", pos);
         }*/
     }
 }

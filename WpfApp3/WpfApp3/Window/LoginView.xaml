@@ -23,36 +23,42 @@
                     <RowDefinition Height="1.2*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="1">
-                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16" Foreground="#FF378CE7">아이디</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16" FontWeight="Bold" Foreground="#FF378CE7">아이디</TextBlock>
                     <TextBox x:Name="xUserId" Margin="0 4 0 10" Padding="10"
-                        FontSize="24" Foreground="#ff424242"
+                        FontSize="20" Foreground="#ff424242"
                         TextAlignment="Left"
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Left" Width="400" Height="60"
+                        HorizontalContentAlignment="Left" Width="400" Height="50"
                         Text="{Binding UserID}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
-                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16" Foreground="#FF378CE7">비밀번호</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16" FontWeight="Bold" Foreground="#FF378CE7">비밀번호</TextBlock>
                     <PasswordBox x:Name="xUserPwd" Grid.Row="2" Padding="10" Margin="0 4 0 10"
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60"
-                        PasswordChanged="xUserPwd_PasswordChanged" FontSize="24"/>
+                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="50"
+                        PasswordChanged="xUserPwd_PasswordChanged" FontSize="20"/>
                 </StackPanel>
 
-                <Grid Grid.Row="3" Margin="0 0 0 0">
+                <Grid Grid.Row="3" Margin="0,10,0,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
-
-                    <Button Grid.Column="0"
-                        Content="로그인" Width="400" Height="60" Cursor="Hand" Margin="0 5 0 5"
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <Label Width="390" />
+                        <TextBlock Text="회원가입"  FontWeight="Bold"
+                               HorizontalAlignment="Center" Foreground="LightBlue"
+                               TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Margin="5,2,10,0"/>
+                        <TextBlock Text="미가입 로그인"  FontWeight="Bold"
+                               HorizontalAlignment="Center" Foreground="LightBlue"
+                               TextDecorations="Underline"  MouseLeftButtonDown="TextBlock1_MouseLeftButtonDown" Cursor="Hand" Margin="5,2,0,0"/>
+                    </StackPanel>
+                    <Button Grid.Row="1" FontSize="40px" 
+                        Content="LOGIN" Width="400" Height="60" Cursor="Hand" Margin="0 5 0 5"
                         Command="{Binding LoginCommand}" Foreground="White" Background="#378CE7"/>
                     <!--="Button_Click"-->
-                    <TextBlock Grid.Row="1" Text="회원가입" VerticalAlignment="Top" 
-                               HorizontalAlignment="Center" Foreground="LightBlue"
-                               TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Margin="0,2,0,0"/>
+                    
                 </Grid>
                 <Label Content="LOGIN" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top" Width="328" Height="94" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" Foreground="#FF378CE7" FontFamily="Arial Black"/>
             </Grid>
@@ -91,53 +97,86 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height=".4*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <TextBlock 
-                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                    FontSize="30" Margin="0 30 0 0">
-                    회원가입
-                </TextBlock>
+                <Label Content="NEW ACCOUNT" HorizontalAlignment="Center"
+                       VerticalAlignment="Top" Width="328" 
+                       Height="94" HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" FontSize="35" 
+                       Foreground="#FF378CE7" FontFamily="Arial Black"/>
 
                 <StackPanel Grid.Row="1">
-                    <TextBlock HorizontalAlignment="Center" Margin="360 0 0 0" FontSize="16">이름</TextBlock>
-                    <TextBox x:Name="xRegUserName" Padding="10" Margin="0 4 0 10"
-                        FontSize="16" Foreground="#ff424242"
-                        TextAlignment="Left"
-                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Left" Width="400" Height="60"
-                        Text="{Binding RegUserName}"/>
-                    <!--TextChanged="xRegUserName_TextChanged"/>-->
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
-                    <TextBlock HorizontalAlignment="Center" Margin="346 0 0 0" FontSize="16">아이디</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="380 0 0 0" FontSize="16" 
+                               Foreground="#FF378CE7" FontFamily="Arial Black">ID</TextBlock>
                     <TextBox x:Name="xRegUserId"  Padding="10" Margin="0 4 0 10"
                         FontSize="16" Foreground="#ff424242"
                         TextAlignment="Left"
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Left" Width="400" Height="60"
-                        Text="{Binding RegUserID}"/>
-                    <!--TextChanged="xRegUserId_TextChanged"/>-->
+                        HorizontalContentAlignment="Left" Width="400" Height="50" />
+                    <!--TextChanged="xRegUserIRegUserNamed_TextChanged"/>-->
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
-                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16">비밀번호</TextBlock>
+                <StackPanel Grid.Row="2">
+                    <TextBlock HorizontalAlignment="Center" Margin="300 0 0 0" FontSize="16" 
+                               Foreground="#FF378CE7" FontFamily="Arial Black">PASSWORD</TextBlock>
                     <PasswordBox x:Name="xRegUserPwd" Padding="10" Margin="0 4 0 10"
                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60" 
+                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="50"
                         PasswordChanged="xRegUserPwdChk_PasswordChanged"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
-                    <TextBlock HorizontalAlignment="Center" Margin="294 0 0 0" FontSize="16">비밀번호 확인</TextBlock>
-                    <PasswordBox x:Name="xRegUserPwdChk" Padding="10" Margin="0 4 0 10"
-                        VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                        HorizontalAlignment="Center" PasswordChar="*" Width="400" Height="60" 
-                        PasswordChanged="xRegUserPwdChk_PasswordChanged_1"/>
+                <StackPanel Grid.Row="3">
+                    <TextBlock HorizontalAlignment="Center" Margin="320 0 0 0" FontSize="16" 
+                               Foreground="#FF378CE7" FontFamily="Arial Black">NUMBER</TextBlock>
+                    <TextBox x:Name="xRegUserNumber" Padding="10" Margin="0 4 0 10"
+                        FontSize="16" Foreground="#ff424242"
+                        TextAlignment="Left"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left" Width="400" Height="50"
+                        Text="{Binding RegUserNumber}"/>
+                    <!--TextChanged="xRegUserName_TextChanged"/>-->
                 </StackPanel>
 
-                <Button Grid.Row="5" 
+                <StackPanel Grid.Row="4">
+                    <TextBlock HorizontalAlignment="Center" Margin="348 0 0 0" FontSize="16"
+                               Foreground="#FF378CE7" FontFamily="Arial Black">NAME</TextBlock>
+                    <TextBox x:Name="xRegUserName" Padding="10" Margin="0 4 0 10"
+                        FontSize="16" Foreground="#ff424242"
+                        TextAlignment="Left"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left" Width="400" Height="50"
+                        Text="{Binding RegUserName}"/>
+                    <!--TextChanged="xRegUserName_TextChanged"/>-->
+                </StackPanel>
+
+                <StackPanel Grid.Row="5">               
+                    <TextBlock HorizontalAlignment="Center" Margin="345 0 0 0" FontSize="16"
+                                   Foreground="#FF378CE7" FontFamily="Arial Black">EMAIL</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="393"/>
+                        <TextBox x:Name="xRegUserEmail" Padding="10" Margin="0 4 0 10"
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                            HorizontalAlignment="Center" Width="250" Height="50" 
+                                 Text="{Binding RegUserEmail}"/>
+                        <Label Content="@" HorizontalAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
+                        <ComboBox Padding="10" Margin="0 4 0 10" Background="White"
+                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                                  HorizontalAlignment="Center" Width="120" Height="40" VerticalAlignment="Bottom"
+                                  ItemsSource="{Binding EmailAddList}"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="6" VerticalAlignment="Center" >
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="400"/>
+                        <RadioButton GroupName="authority" FontWeight="Bold">관리자</RadioButton>
+                        <RadioButton GroupName="authority" FontWeight="Bold" Margin="10,0,0,0">민원인</RadioButton>
+                        <RadioButton GroupName="authority" IsChecked="True" FontWeight="Bold" Margin="10,0,0,0">일반사용자</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Grid.Row="7" 
                     Content="회원가입" Width="400" Height="60" Cursor="Hand"
                     Foreground="White" Background="#378CE7" Command="{Binding SignUpCommand}"/>
             </Grid>
