@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace WpfApp3.Model
 {
     public class LoginInfo
-    {
+    {/*
         public string UserID { get; set; }
-        public string UserPassword { get; set; }
+        public string UserPassword { get; set; }*/
     }
 }

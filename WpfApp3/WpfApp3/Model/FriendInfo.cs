@@ -9,9 +9,9 @@ namespace WpfApp3.Model
 {
     public class FriendInfo
     {
-        public BitmapImage ImageSrc { get; set; }
+        /*public BitmapImage ImageSrc { get; set; }
         public string FriendName { get; set; }
-        public string FriendStatusMsg { get; set; }
+        public string FriendStatusMsg { get; set; }*/
         
     }
 }

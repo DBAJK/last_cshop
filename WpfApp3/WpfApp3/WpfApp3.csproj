@@ -230,27 +230,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\setting.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\img01.png" />
-    <Resource Include="Image\img02.png" />
-    <Resource Include="Image\img03.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\tino.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\keyboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\123.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\456.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\fix.png" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

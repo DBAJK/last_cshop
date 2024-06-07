@@ -117,8 +117,8 @@
                         FontSize="16" Foreground="#ff424242"
                         TextAlignment="Left"
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Left" Width="400" Height="50" />
-                    <!--TextChanged="xRegUserIRegUserNamed_TextChanged"/>-->
+                        HorizontalContentAlignment="Left" Width="400" Height="50" 
+                             Text="{Binding RegUserId}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
@@ -139,7 +139,6 @@
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
                         HorizontalContentAlignment="Left" Width="400" Height="50"
                         Text="{Binding RegUserNumber}"/>
-                    <!--TextChanged="xRegUserName_TextChanged"/>-->
                 </StackPanel>
 
                 <StackPanel Grid.Row="4">
@@ -151,7 +150,6 @@
                         VerticalContentAlignment="Center" HorizontalAlignment="Center"
                         HorizontalContentAlignment="Left" Width="400" Height="50"
                         Text="{Binding RegUserName}"/>
-                    <!--TextChanged="xRegUserName_TextChanged"/>-->
                 </StackPanel>
 
                 <StackPanel Grid.Row="5">

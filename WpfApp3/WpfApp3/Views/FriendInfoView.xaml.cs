@@ -11,7 +11,7 @@ namespace WpfApp3.Views
     public class FriendInfoViewModel : Notifier
     {
         // FriendInfo
-        private FriendInfoView _View;
+/*        private FriendInfoView _View;
         public FriendInfoViewModel(FriendInfoView view) 
         {
             _View = view;
@@ -52,20 +52,20 @@ namespace WpfApp3.Views
                 FriendStatusMsg = "친구3상태",
             });
         }
-    }
+*/    }
 
     /// <summary>
     /// FriendInfoView.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class FriendInfoView : UserControl
     {
-        public FriendInfoViewModel ViewModel { get; set; }
+        /*public FriendInfoViewModel ViewModel { get; set; }
         public FriendInfoView()
         {
             InitializeComponent();
 
             FriendInfoViewModel ViewModel = new FriendInfoViewModel(this);
             this.DataContext = ViewModel;
-        }
+        }*/
     }
 }

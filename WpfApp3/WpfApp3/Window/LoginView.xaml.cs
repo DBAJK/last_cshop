@@ -16,6 +16,8 @@ using WpfApp3.Handler;
 using WpfApp3.DB;
 using WpfApp3.ENCRYPTION;
 using WpfApp3.Model;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace WpfApp3.Views
 {
@@ -92,37 +94,22 @@ namespace WpfApp3.Views
         public int UserPasswordLen { get; set; }
 
         // 회원가입 변수
-        public int RegNameLen { get; set; }
         public int RegIDLen { get; set; }
         public int RegPasswordLen { get; set; }
-
-        private string _RegUserName;
-        public string RegUserName
+        public int RegNumberLen { get; set; }
+        public int RegNameLen { get; set; }
+        public int RegEmailLen { get; set; }
+        
+        private string _RegUserId;
+        public string RegUserId
         {
             get
             {
-                return _RegUserName;
+                return _RegUserId;
             }
             set
             {
-                _RegUserName = value;
-                RegNameLen = value.Length;
-                OnPropertyChange("RegUserName");
-                //UserIdLen = _UserName.Length;
-                //OnPropertyChange("UserName");
-            }
-        }
-
-        private string _RegUserID;
-        public string RegUserID
-        {
-            get
-            {
-                return _RegUserID;
-            }
-            set
-            {
-                _RegUserID = value;
+                _RegUserId = value;
                 RegIDLen = value.Length;
                 OnPropertyChange("RegUserID");
             }
@@ -142,21 +129,44 @@ namespace WpfApp3.Views
             }
         }
 
-        /*private string _RegUserPassword;
-        public string RegUserPassword
+        private string _RegUserName;
+        public string RegUserName
         {
             get
             {
-                return _RegUserPassword;
+                return _RegUserName;
             }
             set
             {
-                _RegUserPassword = value;
-                RegPasswordLen = value.Length;
+                _RegUserName = value;
+                RegNameLen = value.Length;
+                OnPropertyChange("RegUserName");
             }
-        }*/
+        }
 
-        
+        private string _RegUserEmail;
+        public string RegUserEmail
+        {
+            get { return _RegUserEmail; }
+            set
+            {
+                _RegUserEmail = value;
+                RegEmailLen = value.Length;
+                OnPropertyChange("RegUserEmail");
+            }
+        }
+
+        private string _RegUserNumber;
+        public string RegUserNumber
+        {
+            get { return _RegUserNumber; }
+            set
+            {
+                _RegUserNumber = value;
+                RegNumberLen = value.Length;
+                OnPropertyChange("RegUserNumber");
+            }
+        }        
         // 회원가입 변수
 
         //private RelayCommand _LogInCommand;
@@ -199,7 +209,7 @@ namespace WpfApp3.Views
                 // DB 연결
                 DB_CONNECTOR db = new DB_CONNECTOR();   
 
-                if (db.userIdDuplication(RegUserID))
+                if (db.userIdDuplication(RegUserId))
                 {
                     // 비밀번호는 암호화 후 전달
                     SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
@@ -225,18 +235,25 @@ namespace WpfApp3.Views
         private string SignUpChk()
         {
             string errMsg = "";
-
-            if (RegNameLen < 2 || RegNameLen > 20) // 이름 검증
+            if (RegIDLen  <= 0) // 아이디 검증
+            {
+                errMsg = "아이디를 입력해주세요.";
+            }
+            else if (RegPasswordLen <= 0 ) // 비밀번호 검증
+            {
+                errMsg = "비밀번호를 입력해주세요.";
+            }
+            else if (RegNumberLen != 11)
+            {
+                errMsg = "번호는 11자리로 입력해주세요.";
+            }
+            else if (RegNameLen < 2 || RegNameLen > 20) // 이름 검증
             {
                 errMsg = "이름은 2자 이상 20자 이하로 입력해주세요.";
             }
-            else if (RegIDLen < 6 || RegIDLen > 10) // 아이디 검증
+            else if (RegEmailLen <= 0)
             {
-                errMsg = "아이디는 6자 이상 10자 이하로 입력해주세요.";
-            }
-            else if (RegPasswordLen < 6 || RegPasswordLen > 10) // 비밀번호 검증
-            {
-                errMsg = "비밀번호는 6자 이상 10자 이하로 입력해주세요.";
+                errMsg = "이메일을 입력해주세요.";
             }
             return errMsg;
         }
@@ -245,9 +262,12 @@ namespace WpfApp3.Views
         // 회원가입화면 -> 이전화면 버튼 바인딩
         public void OnMoveLoginView(object obj)
         {
+            RegUserId = "";
+            RegUserPassword = "";
             RegUserName = "";
-            RegUserID = "";
-            _View.xRegUserPwd.Password = "";
+            RegUserNumber = "";
+            RegUserEmail = "";
+            //_View.xRegUserPwd.Password = "";
 
             _View.xLoginView.Visibility = Visibility.Visible;
             _View.xSignUpView.Visibility = Visibility.Hidden;
@@ -345,20 +365,6 @@ namespace WpfApp3.Views
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // 비밀번호 입력 이벤트
         private void xRegUserPwdChk_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -371,20 +377,6 @@ namespace WpfApp3.Views
                 //ViewModel.UserPasswordLen = passwordBox.Password.Length;
             }
         }
-
-        // 비밀번호 확인 입력 이벤트
-        private void xRegUserPwdChk_PasswordChanged_1(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel == null) return;
-
-            if (sender != null)
-            {
-                PasswordBox passwordBox = sender as PasswordBox;
-                //ViewModel.RegUserPasswordChk = passwordBox.Password;
-                //ViewModel.UserPasswordLen = passwordBox.Password.Length;
-            }
-        }
-
     }
 
 
