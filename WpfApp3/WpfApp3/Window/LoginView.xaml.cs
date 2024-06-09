@@ -212,10 +212,10 @@ namespace WpfApp3.Views
                 if (db.userIdDuplication(RegUserId))
                 {
                     // 비밀번호는 암호화 후 전달
-                    SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
+/*                    SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
                     string pwdStr = sha256.Connect(RegUserPassword);
-
-                    db.userInsertData(UserID, pwdStr, RegUserName);
+*/
+                    db.userInsertData(UserID, RegUserPassword, RegUserName);
 
                     MessageBox.Show("등록되었습니다.", "성공");
 
@@ -305,7 +305,7 @@ namespace WpfApp3.Views
     /// <summary>
     /// LoginView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class LoginView : Window
+    public partial class LoginView
     {
         public LoginViewModel ViewModel = null;
 

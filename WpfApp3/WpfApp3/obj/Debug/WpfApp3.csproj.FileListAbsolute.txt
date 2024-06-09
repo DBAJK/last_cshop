@@ -181,3 +181,5 @@ D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Memory.xml
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Numerics.Vectors.xml
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\MemberView.g.cs
+D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\MemberView.baml

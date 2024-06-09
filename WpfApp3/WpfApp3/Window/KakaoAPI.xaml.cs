@@ -19,6 +19,7 @@ using WpfApp3.ENCRYPTION;
 using WpfApp3.Model;
 using System.IO;
 using System.Net;
+using WpfApp3.Window;
 //using System.Windows.Forms;
 
 
@@ -27,13 +28,70 @@ namespace WpfApp3.Views
     /// <summary>
     /// KakaoAPI.xaml에 대한 상호 작용 논리
     /// </summary>
+    /// 
+    public class KakaoAPIViewModel : Notifier
+    {
+        private KakaoAPI _View;
+        private LoginView _LoginView;
+
+        private RelayCommand _LogoutCommand;
+        public RelayCommand LogoutCommand
+        {
+            get { return _LogoutCommand ?? (_LogoutCommand = new RelayCommand(OnLogout)); }
+        }
+        private RelayCommand _MemberTableCommand;
+        public RelayCommand MemberTableCommand
+        {
+            get { return _MemberTableCommand ?? (_MemberTableCommand = new RelayCommand(OnGoMemberTable)); }
+        }
+
+
+        public KakaoAPIViewModel(KakaoAPI view)
+        {
+            _View = view;
+
+            // Login은 ID, PWD 이고, CanLogin은 조건 검증
+            //LogInCommand = new RelayCommand(LogIn, CanLogIn);
+        }
+
+
+
+        public void OnLogout(object obj)
+        {
+            new LoginView().Show();
+
+            _View.Close();
+        }
+
+        public void OnGoMemberTable(object obj)
+        {
+            new MemberView().Show();
+
+            _View.Close();
+        }
+
+    }
     public partial class KakaoAPI
     {
+        private KakaoAPI _View;
+        private LoginView _LoginView;
+
+        public KakaoAPIViewModel ViewModel = null;
+
         public KakaoAPI()
         {
             InitializeComponent();
+
+            ViewModel = new KakaoAPIViewModel(this);
+            this.DataContext = ViewModel;
+
         }
 
+        /*private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _LoginView.xLoginView.Visibility = Visibility.Visible;
+            _View.xMapView.Visibility = Visibility.Hidden;
+        }*/
         /*private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
