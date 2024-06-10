@@ -1,5 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +18,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp3.DB;
 using WpfApp3.Handler;
+using WpfApp3.Model;
 using WpfApp3.Views;
 
 namespace WpfApp3.Window
@@ -21,7 +30,16 @@ namespace WpfApp3.Window
     /// </summary>
     public class MemberViewModel : Notifier
     {
+        private DB_CONNECTOR dbConnect;
+
         private MemberView _View;
+
+        private ObservableCollection<MemberInfo> _MemberList;
+        public ObservableCollection<MemberInfo> MemberList
+        {
+            get { return _MemberList; }
+            set { _MemberList = value; OnPropertyChange("MemberList"); }
+        }
 
         private RelayCommand _AuthorityCommand;
         public RelayCommand AuthorityCommand
@@ -32,9 +50,11 @@ namespace WpfApp3.Window
         public MemberViewModel(MemberView view)
         {
             _View = view;
+            MemberList = new ObservableCollection<MemberInfo>();
 
-            // Login은 ID, PWD 이고, CanLogin은 조건 검증
-            //LogInCommand = new RelayCommand(LogIn, CanLogIn);
+            dbConnect = new DB_CONNECTOR();
+
+            LoadMembers();
         }
 
         public void OnBackBtn(object obj)
@@ -44,15 +64,51 @@ namespace WpfApp3.Window
             _View.Close();
 
         }
+        public void LoadMembers()
+        {
+            this.MemberList.Clear();
+
+            try
+            {
+                using (MySqlConnection conn = dbConnect.MemberViewConn())
+                {
+                    conn.Open();
+                    string query = "SELECT sequence_id, user_name, user_id, user_email, user_tel, user_auth, cre_date, user_info FROM members;"; // your_table_name을 실제 테이블 이름으로 변경하세요
+                    //MySqlCommand cmd = new MySqlCommand(query, conn);
+                    //MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    //DataTable dt = new DataTable();
+                    //adapter.Fill(dt);
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                MemberInfo member = new MemberInfo();
+                                member.sequence_id = reader["sequence_id"].ToString();
+                                member.user_name = reader["user_name"].ToString();
+                                member.user_id = reader["user_id"].ToString();
+                                member.user_email = reader["user_email"].ToString();
+                                member.user_tel = reader["user_tel"].ToString();
+                                member.user_auth = reader["user_auth"].ToString();
+                                member.cre_date = reader["cre_date"].ToString();
+                                member.user_info = reader["user_info"].ToString();
+
+                                MemberList.Add(member);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
     }
-    public class Data
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-        public string major { get; set; }
-        public int grade { get; set; }
-        public string etc { get; set; }
-    }
+
     public partial class MemberView
     {
         private MemberView _View;
@@ -66,16 +122,6 @@ namespace WpfApp3.Window
             ViewModel = new MemberViewModel(this);
             this.DataContext = ViewModel;
 
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<Data> list = new List<Data>();
-            list.Add(new Data { name = "이지원", id = "210651", major = "컴퓨터공학", grade = 1, etc = "" });
-            list.Add(new Data { name = "김현호", id = "210184", major = "컴퓨터공학", grade = 1, etc = "" });
-            list.Add(new Data { name = "강희진", id = "210017", major = "컴퓨터공학", grade = 1, etc = "" });
-            list.Add(new Data { name = "박서준", id = "210439", major = "컴퓨터공학", grade = 1, etc = "" });
-            list.Add(new Data { name = "강나연", id = "210005", major = "컴퓨터공학", grade = 1, etc = "" });
-            xMemberList.ItemsSource = list;
         }
 
     }

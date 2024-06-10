@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WpfApp3
 {
-    /*internal class Locale
+    class MyLocale
     {
         public string Name { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
 
-        public Locale(string name, double lat, double lng)
+        public MyLocale(string name, double lat, double lng)
         {
             Name = name;
             Lat = lat;
@@ -24,5 +24,5 @@ namespace WpfApp3
             return Name;
         }
 
-    }*/
+    }
 }

@@ -1,12 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Spatial;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfApp3.DB
 {
@@ -26,7 +29,7 @@ namespace WpfApp3.DB
             return Conn;
         }
 
-        public void userInsertData(string userId, string userPwd, string userName)
+        public void userInsertData(string user_id, string user_password, string user_name, string user_email, string user_tel)//, string user_info, string user_auth)
         {
             try
             {
@@ -35,26 +38,30 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // user_seq 조회
-                    string sql1 = "select COALESCE(max(user_seq), 0) + 1 from members;";
+                    string sql1 = "select COALESCE(max(sequence_id), 0) + 1 from members;";
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
 
-                    string user_seq = rdr1[0].ToString();
-
+                    string sequence_id = rdr1[0].ToString();
+                    string user_info = "관리자";
+                    string user_auth = "adsf";
+                    string cre_date = DateTime.Now.ToString("yyyy-MM-dd");
                     rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
 
                     // 데이터 임시 등록
-                    string sql2 = "insert into members values('" + userId+"','"+userPwd+"', '"+userName+"', "+ user_seq + ");";
+                    //string sql2 = "insert into members values('" + userId+"','"+userPwd+"', '"+userName+"', "+ user_seq + ");";
+                    string sql2 = "insert into members values('" + sequence_id + "','" + user_id+"','"+ user_password +"', '"+ user_name +"', '"+ user_email+ "', '" +
+                            user_tel  + "', '" + user_info + "', '" + user_auth + "', '" + cre_date + "');";
                     MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                     cmd2.ExecuteNonQuery();
                     MessageBox.Show("입력 성공");
 
                     // Mysql DB Table 값 가져오기
-                    string sql3 = "select * from members";
+/*                    string sql3 = "select * from members";
                     MySqlCommand cmd3 = new MySqlCommand(sql3, conn);
                     MySqlDataReader rdr = cmd3.ExecuteReader();
-
+*/
                     /*
                     while (rdr.Read())
                     {
@@ -90,7 +97,7 @@ namespace WpfApp3.DB
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
 
-                    int user_id_cnt = Int32.Parse(rdr1[0].ToString());
+                    int user_id_cnt = int.Parse(rdr1[0].ToString());
 
                     err = user_id_cnt == 0;
 
@@ -155,5 +162,40 @@ namespace WpfApp3.DB
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+
+        public MySqlConnection MemberViewConn()
+        {
+            if(conn==null)
+            {
+                conn= new MySqlConnection(dbInfo());
+            }
+            return conn;
+        }
+        /*public DataTable LoadData()
+        {
+            DataTable dataTable = new DataTable();
+
+            
+            using (conn = new MySqlConnection(dbInfo()))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT sequence_id,user_name,user_id,user_email,user_tel,user_auth,cre_date,user_info FROM members";
+                    MySqlCommand cmd2 = new MySqlCommand(query, conn);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd2);
+                    adapter.Fill(dataTable);
+                    Console.WriteLine("Rows retrieved: " + dataTable.Rows.Count);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            return dataTable;
+
+        }*/
+
     }
 }

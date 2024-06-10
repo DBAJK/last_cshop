@@ -54,9 +54,6 @@
                         <TextBlock Text="회원가입"  FontWeight="Bold"
                                HorizontalAlignment="Center" Foreground="LightBlue"
                                TextDecorations="Underline" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Margin="5,2,10,0"/>
-                        <TextBlock Text="미가입 로그인"  FontWeight="Bold"
-                               HorizontalAlignment="Center" Foreground="LightBlue"
-                               TextDecorations="Underline"  MouseLeftButtonDown="TextBlock1_MouseLeftButtonDown" Cursor="Hand" Margin="5,2,0,0"/>
                     </StackPanel>
                     <Button Grid.Row="1" FontSize="40px" 
                         Content="LOGIN" Width="400" Height="60" Cursor="Hand" Margin="0 5 0 5"

@@ -25,16 +25,22 @@
 
             </Grid>
 
-            <DataGrid Grid.Row="1" x:Name="xMemberList" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid Grid.Row="1" 
+                      x:Name="xMemberList"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False" FontSize="30" 
+                      FontFamily="Arial Black" 
+                      HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding MemberList}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="INDEX" Binding="{Binding Path=index}" Width="*"/>
-                    <DataGridTextColumn Header="이름" Binding="{Binding Path=id}" Width="*"/>
-                    <DataGridTextColumn Header="아이디" Binding="{Binding Path=name}" Width="*"/>
-                    <DataGridTextColumn Header="이메일" Binding="{Binding Path=email}" Width="*"/>
-                    <DataGridTextColumn Header="전화번호" Binding="{Binding Path=phoneNumber}" Width="*"/>
-                    <DataGridTextColumn Header="권한" Binding="{Binding Path=authority}" Width="*"/>
-                    <DataGridTextColumn Header="가입 일자" Binding="{Binding Path=joinDate}" Width="*"/>
-                    <DataGridTextColumn Header="상태" Binding="{Binding Path=situation}" Width="*"/>
+                    <DataGridTextColumn Header="INDEX" Binding="{Binding Path=sequence_id}" Width="*"/>
+                    <DataGridTextColumn Header="이름" Binding="{Binding Path=user_name}" Width="*"/>
+                    <DataGridTextColumn Header="아이디" Binding="{Binding Path=user_id}" Width="*"/>
+                    <DataGridTextColumn Header="이메일" Binding="{Binding Path=user_email}" Width="*"/>
+                    <DataGridTextColumn Header="전화번호" Binding="{Binding Path=user_tel}" Width="*"/>
+                    <DataGridTextColumn Header="권한" Binding="{Binding Path=user_auth}" Width="*"/>
+                    <DataGridTextColumn Header="가입 일자" Binding="{Binding Path=cre_date}" Width="*"/>
+                    <DataGridTextColumn Header="상태" Binding="{Binding Path=user_info}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

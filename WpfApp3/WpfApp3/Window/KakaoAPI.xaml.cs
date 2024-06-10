@@ -87,6 +87,25 @@ namespace WpfApp3.Views
 
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<MyLocale> mls = KakaoAPIS.Search(tbox_query.Text);
+            lbox_locale.ItemsSource = mls;
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbox_locale.SelectedIndex == -1)
+            {
+                return;
+            }
+            MyLocale ml = lbox_locale.SelectedItem as MyLocale;
+            object[] ps = new object[] { ml.Lat, ml.Lng };
+            kakaoMapB.InvokeScript("setCenter", ps);
+        }
+
+
+
         /*private void Button_Click(object sender, RoutedEventArgs e)
         {
             _LoginView.xLoginView.Visibility = Visibility.Visible;

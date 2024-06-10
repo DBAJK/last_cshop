@@ -215,8 +215,7 @@ namespace WpfApp3.Views
 /*                    SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
                     string pwdStr = sha256.Connect(RegUserPassword);
 */
-                    db.userInsertData(UserID, RegUserPassword, RegUserName);
-
+                    db.userInsertData(RegUserId, RegUserPassword, RegUserName, RegUserEmail, RegUserNumber);
                     MessageBox.Show("등록되었습니다.", "성공");
 
                     _View.xLoginView.Visibility = Visibility.Visible;
@@ -329,12 +328,6 @@ namespace WpfApp3.Views
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            xLoginView.Visibility = Visibility.Hidden;
-            xSignUpView.Visibility = Visibility.Visible;
-        }
-
-        private void TextBlock1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             xLoginView.Visibility = Visibility.Hidden;
             xSignUpView.Visibility = Visibility.Visible;

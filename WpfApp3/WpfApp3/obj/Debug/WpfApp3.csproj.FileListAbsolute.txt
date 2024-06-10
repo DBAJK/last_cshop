@@ -115,9 +115,6 @@ D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\WpfApp3.csproj.SuggestedBindingRedirect
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\MainWindow.g.cs
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\FriendInfoView.g.cs
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\LoginView.g.cs
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\SettingView.g.cs
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\SignUpView.g.cs
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\TypingListView.g.cs
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\UserInfoView.g.cs
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\App.g.cs
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\GeneratedInternalTypeHelper.g.cs
@@ -144,9 +141,6 @@ D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Data.SQLite.xml
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\MainWindow.baml
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\FriendInfoView.baml
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\LoginView.baml
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\SettingView.baml
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\SignUpView.baml
-D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\TypingListView.baml
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Views\UserInfoView.baml
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\WpfApp3.g.resources
 D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\WpfApp3.Properties.Resources.resources

@@ -14,7 +14,7 @@
             <!--<view:SignUpView Visibility="Hidden" x:Name="xSignUpView"/>  -->
             <!-- <view:MainView Visibility="Visible" x:Name="xMainView"/> -->
             <!-- <view:SettingView Visibility="Hidden" x:Name="xSettingView"/> -->
-            <view:TypingListView Visibility="Hidden" x:Name="xTypingListView"/> <!-- 바탕화면 선택 화면 -->
+            <!--<view:TypingListView Visibility="Hidden" x:Name="xTypingListView"/> 바탕화면 선택 화면 -->
         </Grid>
     </Grid>
 </Window>

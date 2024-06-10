@@ -108,6 +108,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -135,10 +136,11 @@
     <Compile Include="GlobalVariable.cs" />
     <Compile Include="Handler\RelayCommand.cs" />
     <Compile Include="Handler\Notifier.cs" />
-    <Compile Include="KakaoAPI.cs" />
+    <Compile Include="KakaoAPIS.cs" />
     <Compile Include="Locale.cs" />
     <Compile Include="Model\FriendInfo.cs" />
     <Compile Include="Model\LoginInfo.cs" />
+    <Compile Include="Model\MemberInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Views\FriendInfoView.xaml.cs">
       <DependentUpon>FriendInfoView.xaml</DependentUpon>
@@ -148,15 +150,6 @@
     </Compile>
     <Compile Include="Window\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingView.xaml.cs">
-      <DependentUpon>SettingView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SignUpView.xaml.cs">
-      <DependentUpon>SignUpView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TypingListView.xaml.cs">
-      <DependentUpon>TypingListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserInfoView.xaml.cs">
       <DependentUpon>UserInfoView.xaml</DependentUpon>
@@ -185,18 +178,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window\LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SettingView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SignUpView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TypingListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

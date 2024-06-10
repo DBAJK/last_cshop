@@ -24,11 +24,12 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0">
-                    <TextBox Width="250" Height="40"/>
-                    <Button Width="80" Margin="10,0,0,0" Height="40" Content="검색"/>
+                    <TextBox Name="tbox_query" Width="230" Height="40" FontSize="25"  FontFamily="Arial"/>
+                    <Button Name="btn_search" Click="Button_Click" Width="90" Margin="10,0,0,0" Height="40" Content="검색"/>
                 </StackPanel>
 
-                <ListBox Grid.Row="1" Margin="10,0"/>
+                <ListBox Name="lbox_locale" SelectionChanged="ListBox_SelectionChanged" 
+                         Grid.Row="1" Margin="10,0"/>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <Button Width="200" Height="40" Margin="10,0" HorizontalAlignment="Left" Content="로그아웃" Command="{Binding LogoutCommand}"/>
@@ -38,7 +39,7 @@
 
 
             <Grid Grid.Column="1">
-                <WebBrowser Margin="10" Source="https://dbajk.github.io/c_API_kakao/"/>
+                <WebBrowser  Name="kakaoMapB" Margin="10" Source="https://dbajk.github.io/c_API_kakao/"/>
             </Grid>
         </Grid>
     </Grid>
