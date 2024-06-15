@@ -18,6 +18,7 @@ using WpfApp3.ENCRYPTION;
 using WpfApp3.Model;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace WpfApp3.Views
 {
@@ -99,7 +100,13 @@ namespace WpfApp3.Views
         public int RegNumberLen { get; set; }
         public int RegNameLen { get; set; }
         public int RegEmailLen { get; set; }
-        
+        public List<string> EmailAddList { get; set; } = new List<string>()
+        {
+            "naver.com",
+            "gmail.com",
+            "daum.net"
+        };
+
         private string _RegUserId;
         public string RegUserId
         {
@@ -185,6 +192,7 @@ namespace WpfApp3.Views
                 UserInfo UserInfo = new UserInfo();
                 UserInfo.UserName = _userInfo[0];
                 UserInfo.UserSeq = _userInfo[1];
+                UserInfo.authData = _userInfo[2];
 
                 GlobalVariable.Instance().userInfo = UserInfo;
 
@@ -212,10 +220,28 @@ namespace WpfApp3.Views
                 if (db.userIdDuplication(RegUserId))
                 {
                     // 비밀번호는 암호화 후 전달
-/*                    SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
+                    SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
                     string pwdStr = sha256.Connect(RegUserPassword);
-*/
-                    db.userInsertData(RegUserId, RegUserPassword, RegUserName, RegUserEmail, RegUserNumber);
+
+                    ///////권한 설정
+                    string selectedValue = "";
+
+                    if (_View.AdminRadioButton.IsChecked == true)
+                    {
+                        selectedValue = "admin";
+                    }
+                    else if (_View.CustomerRadioButton.IsChecked == true)
+                    {
+                        selectedValue = "customer";
+                    }
+                    else if (_View.UserRadioButton.IsChecked == true)
+                    {
+                        selectedValue = "user";
+                    }
+                    //////////
+
+                    //RegUserPassword
+                    db.userInsertData(RegUserId, pwdStr, RegUserName, RegUserEmail, RegUserNumber,selectedValue);
                     MessageBox.Show("등록되었습니다.", "성공");
 
                     _View.xLoginView.Visibility = Visibility.Visible;
@@ -242,7 +268,7 @@ namespace WpfApp3.Views
             {
                 errMsg = "비밀번호를 입력해주세요.";
             }
-            else if (RegNumberLen != 11)
+            else if (RegNumberLen != 13)
             {
                 errMsg = "번호는 11자리로 입력해주세요.";
             }
@@ -290,14 +316,13 @@ namespace WpfApp3.Views
             DB_CONNECTOR db = new DB_CONNECTOR();
 
             // 비밀번호는 암호화 후 전달
-/*            SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
+            SHA256_ENCRYP sha256 = new SHA256_ENCRYP();
             string pwdStr = sha256.Connect(UserPassword);
-*/
-            _userInfo = db.userLoginChk(UserID, UserPassword);
 
+            _userInfo = db.userLoginChk(UserID, pwdStr);
+            
             return _userInfo[0].Length > 0;
         }
-
 
     }
 
@@ -308,24 +333,24 @@ namespace WpfApp3.Views
     {
         public LoginViewModel ViewModel = null;
 
-        class ComboBoxEmailAddList
-        {
-            public List<string> EmailAddList { get; set; } = new List<string>()
-            {
-                "naver.com",
-                "gmail.com",
-                "daum.net"
-            };
-        }
-
         public LoginView()
         {
             InitializeComponent();
             
             ViewModel = new LoginViewModel(this);
             this.DataContext = ViewModel;
-            //DataContext = new ComboBoxEmailAddList();
         }
+
+
+
+        /*public String OnGetFullEmailClick()
+        {
+            string regUserEmail = xRegUserEmail.Text;
+            string selectedEmailAdd = xEmailAddComboBox.SelectedItem?.ToString();
+            string fullEmail = $"{regUserEmail}@{selectedEmailAdd}";
+
+            return fullEmail;
+        }*/
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -368,6 +393,40 @@ namespace WpfApp3.Views
                 PasswordBox passwordBox = sender as PasswordBox;
                 ViewModel.RegUserPassword = passwordBox.Password;
                 //ViewModel.UserPasswordLen = passwordBox.Password.Length;
+            }
+        }
+        private void xRegUserNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string text = textBox.Text.Replace("-", "");
+
+            if (text.Length > 3 && text.Length <= 7)
+            {
+                text = text.Insert(3, "-");
+            }
+            else if (text.Length > 7)
+            {
+                text = text.Insert(3, "-").Insert(8, "-");
+            }
+
+            textBox.Text = text;
+            textBox.CaretIndex = textBox.Text.Length; // Move caret to the end of the text
+        }
+
+        private void xRegUserNumber_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            // Allow control keys (e.g., backspace, delete, arrow keys)
+            if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Left || e.Key == Key.Right)
+            {
+                return;
+            }
+
+            // Allow only numeric input
+            if (!((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)))
+            {
+                e.Handled = true;
             }
         }
     }

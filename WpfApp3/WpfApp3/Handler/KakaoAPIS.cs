@@ -36,7 +36,7 @@ namespace WpfApp3
 
             for (int i = 0; i < length; i++)
             {
-                string lname = docs[i]["place_name"];
+                string lname = docs[i]["place_name"];   
                 double x = double.Parse(docs[i]["x"]);
                 double y = double.Parse(docs[i]["y"]);
                 list.Add(new Locale(lname, x, y));

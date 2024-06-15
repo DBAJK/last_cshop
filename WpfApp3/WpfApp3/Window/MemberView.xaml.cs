@@ -78,7 +78,7 @@ namespace WpfApp3.Window
                     //MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     //DataTable dt = new DataTable();
                     //adapter.Fill(dt);
-
+                    
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         using (var reader = cmd.ExecuteReader())
@@ -121,7 +121,7 @@ namespace WpfApp3.Window
 
             ViewModel = new MemberViewModel(this);
             this.DataContext = ViewModel;
-
+           
         }
 
     }

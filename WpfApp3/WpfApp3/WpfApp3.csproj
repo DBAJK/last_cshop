@@ -68,6 +68,9 @@
     <Reference Include="MySql.Data, Version=8.4.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.4.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -109,6 +112,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -133,11 +137,13 @@
     <Compile Include="Converter\ErrMsgConverter.cs" />
     <Compile Include="DB\DB_CONNECTOR.cs" />
     <Compile Include="ENCRYPTION\SHA256_ENCRYP.cs" />
-    <Compile Include="GlobalVariable.cs" />
+    <Compile Include="Handler\GlobalVariable.cs" />
+    <Compile Include="Handler\KakaoMapService.cs" />
+    <Compile Include="Handler\LocationContext.cs" />
     <Compile Include="Handler\RelayCommand.cs" />
     <Compile Include="Handler\Notifier.cs" />
-    <Compile Include="KakaoAPIS.cs" />
-    <Compile Include="Locale.cs" />
+    <Compile Include="Handler\KakaoAPIS.cs" />
+    <Compile Include="Handler\Locale.cs" />
     <Compile Include="Model\FriendInfo.cs" />
     <Compile Include="Model\LoginInfo.cs" />
     <Compile Include="Model\MemberInfo.cs" />

@@ -28,19 +28,46 @@
             <DataGrid Grid.Row="1" 
                       x:Name="xMemberList"
                       AutoGenerateColumns="False"
-                      CanUserAddRows="False" FontSize="30" 
-                      FontFamily="Arial Black" 
                       HorizontalAlignment="Left" VerticalContentAlignment="Center"
                       ItemsSource="{Binding MemberList}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontFamily" Value="Arial Black"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontFamily" Value="Arial"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="INDEX" Binding="{Binding Path=sequence_id}" Width="*"/>
-                    <DataGridTextColumn Header="이름" Binding="{Binding Path=user_name}" Width="*"/>
-                    <DataGridTextColumn Header="아이디" Binding="{Binding Path=user_id}" Width="*"/>
-                    <DataGridTextColumn Header="이메일" Binding="{Binding Path=user_email}" Width="*"/>
-                    <DataGridTextColumn Header="전화번호" Binding="{Binding Path=user_tel}" Width="*"/>
-                    <DataGridTextColumn Header="권한" Binding="{Binding Path=user_auth}" Width="*"/>
-                    <DataGridTextColumn Header="가입 일자" Binding="{Binding Path=cre_date}" Width="*"/>
+                    <DataGridTextColumn Header="INDEX" Binding="{Binding Path=sequence_id}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="이름" Binding="{Binding Path=user_name}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="아이디" Binding="{Binding Path=user_id}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="이메일" Binding="{Binding Path=user_email}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="전화번호" Binding="{Binding Path=user_tel}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="권한" Binding="{Binding Path=user_auth}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="가입 일자" Binding="{Binding Path=cre_date}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="상태" Binding="{Binding Path=user_info}" Width="*"/>
+
+
+                    <!-- <DataGridTemplateColumn Header="상태" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedIndex="{Binding selected_user_info}" ItemsSource="{Binding user_info}">
+                                    <ComboBoxItem Content="승인"/>
+                                    <ComboBoxItem Content="승인요청"/>
+                                    <ComboBoxItem Content="승인거절"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    -->
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

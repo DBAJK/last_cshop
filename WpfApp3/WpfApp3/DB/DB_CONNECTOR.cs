@@ -29,7 +29,7 @@ namespace WpfApp3.DB
             return Conn;
         }
 
-        public void userInsertData(string user_id, string user_password, string user_name, string user_email, string user_tel)//, string user_info, string user_auth)
+        public void userInsertData(string user_id, string user_password, string user_name, string user_email, string user_tel, string user_auth)//, string user_info
         {
             try
             {
@@ -45,7 +45,6 @@ namespace WpfApp3.DB
 
                     string sequence_id = rdr1[0].ToString();
                     string user_info = "관리자";
-                    string user_auth = "adsf";
                     string cre_date = DateTime.Now.ToString("yyyy-MM-dd");
                     rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
 
@@ -112,7 +111,7 @@ namespace WpfApp3.DB
         // 로그인 검증
         public string[] userLoginChk(string userId, string userPwd)
         {
-            string[] login = {"", ""};
+            string[] login = {"", "", ""};
 
             try
             {
@@ -121,7 +120,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "select user_name, sequence_id from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
+                    string sql1 = "select user_name, sequence_id, user_auth from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
 
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
@@ -129,9 +128,11 @@ namespace WpfApp3.DB
 
                     string user_name = rdr1[0].ToString();
                     string user_seq = rdr1[1].ToString();
+                    string user_auth = rdr1[2].ToString();
 
                     login[0] = user_name;
                     login[1] = user_seq;
+                    login[2] = user_auth;
 
                     //COALESCE(sequence_id, '');
 

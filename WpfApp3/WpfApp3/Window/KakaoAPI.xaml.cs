@@ -20,6 +20,7 @@ using WpfApp3.Model;
 using System.IO;
 using System.Net;
 using WpfApp3.Window;
+using System.Windows.Forms;
 //using System.Windows.Forms;
 
 
@@ -70,6 +71,20 @@ namespace WpfApp3.Views
             _View.Close();
         }
 
+        //권한별
+        private bool _isAdmin;
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                _isAdmin = value;
+               // OnPropertyChanged(nameof(IsAdmin));
+            }
+        }
+
+
     }
     public partial class KakaoAPI
     {
@@ -101,7 +116,9 @@ namespace WpfApp3.Views
             }
             MyLocale ml = lbox_locale.SelectedItem as MyLocale;
             object[] ps = new object[] { ml.Lat, ml.Lng };
-            kakaoMapB.InvokeScript("setCenter", ps);
+            HtmlDocument hdoc = (HtmlDocument)kakaoMapB.Document;
+
+            hdoc.InvokeScript("setCenter", ps);
         }
 
 
