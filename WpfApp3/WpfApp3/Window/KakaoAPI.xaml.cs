@@ -50,7 +50,6 @@ namespace WpfApp3.Views
         public KakaoAPIViewModel(KakaoAPI view)
         {
             _View = view;
-
             // Login은 ID, PWD 이고, CanLogin은 조건 검증
             //LogInCommand = new RelayCommand(LogIn, CanLogIn);
         }
@@ -70,26 +69,14 @@ namespace WpfApp3.Views
 
             _View.Close();
         }
-
-        //권한별
-        private bool _isAdmin;
-
-        public bool IsAdmin
-        {
-            get { return _isAdmin; }
-            set
-            {
-                _isAdmin = value;
-               // OnPropertyChanged(nameof(IsAdmin));
             }
-        }
-
-
-    }
     public partial class KakaoAPI
     {
         private KakaoAPI _View;
+        private KakaoAPIViewModel _viewModel;
         private LoginView _LoginView;
+        private LoginViewModel _LoginChk;
+        private UserInfo _UserInfoChk;
 
         public KakaoAPIViewModel ViewModel = null;
 
@@ -100,7 +87,25 @@ namespace WpfApp3.Views
             ViewModel = new KakaoAPIViewModel(this);
             this.DataContext = ViewModel;
 
+            authDataChk();
         }
+
+        // --!******** 회원관리 버튼 관리자에게 보이게 하기
+        public void authDataChk()
+        {
+            string authData = GlobalVariable._instance.userInfo.authData;
+            
+                //_LoginChk.PubAuthChk.ToString();
+            if (authData == "admin")
+            {
+                xAdminView.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                xAdminView.Visibility = Visibility.Hidden;
+            }
+        }
+        // --!********
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

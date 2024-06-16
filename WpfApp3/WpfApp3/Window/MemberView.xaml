@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3.Window"
         mc:Ignorable="d"
-        d:DesignHeight="839" d:DesignWidth="1448">
+        d:DesignHeight="839" d:DesignWidth="1448"
+        >
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -53,7 +54,19 @@
                     <DataGridTextColumn Header="전화번호" Binding="{Binding Path=user_tel}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="권한" Binding="{Binding Path=user_auth}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="가입 일자" Binding="{Binding Path=cre_date}" Width="*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="상태" Binding="{Binding Path=user_info}" Width="*"/>
+                    <DataGridTemplateColumn Header="상태" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox  SelectedItem="{Binding user_info}">
+                                    <ComboBoxItem Content="승인"/>
+                                    <ComboBoxItem Content="승인요청"/>
+                                    <ComboBoxItem Content="승인거절"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--<DataGridTextColumn Header="상태" Binding="{Binding Path=user_info}" Width="*"/>-->
 
 
                     <!-- <DataGridTemplateColumn Header="상태" Width="*">

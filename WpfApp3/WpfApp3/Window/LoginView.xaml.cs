@@ -19,6 +19,7 @@ using WpfApp3.Model;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Net.Http;
 
 namespace WpfApp3.Views
 {
@@ -100,6 +101,8 @@ namespace WpfApp3.Views
         public int RegNumberLen { get; set; }
         public int RegNameLen { get; set; }
         public int RegEmailLen { get; set; }
+
+        // 이메일 콤보박스 설정
         public List<string> EmailAddList { get; set; } = new List<string>()
         {
             "naver.com",
@@ -162,6 +165,16 @@ namespace WpfApp3.Views
                 OnPropertyChange("RegUserEmail");
             }
         }
+        private string _selectEmailAdd;
+        public string SelectEmailAdd
+        {
+            get { return _selectEmailAdd; }
+            set
+            {
+                _selectEmailAdd = value;
+                OnPropertyChange(nameof(SelectEmailAdd));
+            }
+        }
 
         private string _RegUserNumber;
         public string RegUserNumber
@@ -193,6 +206,12 @@ namespace WpfApp3.Views
                 UserInfo.UserName = _userInfo[0];
                 UserInfo.UserSeq = _userInfo[1];
                 UserInfo.authData = _userInfo[2];
+                UserInfo.userInfo = _userInfo[3];
+                if(UserInfo.userInfo != "승인")
+                {
+                    MessageBox.Show("승인완료 된 계정이 아닙니다.\n관리자에게 문의하십시오.");
+                    return;
+                }
 
                 GlobalVariable.Instance().userInfo = UserInfo;
 
@@ -239,9 +258,12 @@ namespace WpfApp3.Views
                         selectedValue = "user";
                     }
                     //////////
+                    ///이메일 정보 저장
+                    string fullEmail = RegUserEmail + "@" + SelectEmailAdd;
+                    string user_info = "승인신청";
 
                     //RegUserPassword
-                    db.userInsertData(RegUserId, pwdStr, RegUserName, RegUserEmail, RegUserNumber,selectedValue);
+                    db.userInsertData(RegUserId, pwdStr, RegUserName, fullEmail, RegUserNumber,selectedValue, user_info);
                     MessageBox.Show("등록되었습니다.", "성공");
 
                     _View.xLoginView.Visibility = Visibility.Visible;
@@ -323,7 +345,20 @@ namespace WpfApp3.Views
             
             return _userInfo[0].Length > 0;
         }
+/*
+        private static readonly HttpClient client = new HttpClient();
+        private async void SendDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            var data = new { Name = "John", Age = 30 };
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            var response = await client.PostAsync("http://localhost:3000/api/data", content);
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            MessageBox.Show(responseString);
+        }
+*/
     }
 
     /// <summary>

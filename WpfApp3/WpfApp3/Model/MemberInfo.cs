@@ -18,8 +18,8 @@ namespace WpfApp3.Model
         public string cre_date { get; set; }
         public string user_info { get; set; }
 
-        private int _selected_user_info;
-        public int selected_user_info
+        private string _selected_user_info;
+        public string selected_user_info
         {
             get { return _selected_user_info; }
             set

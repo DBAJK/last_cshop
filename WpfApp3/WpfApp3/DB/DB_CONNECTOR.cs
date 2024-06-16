@@ -6,10 +6,12 @@ using System.Data;
 using System.Data.Entity.Spatial;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp3.Model;
 
 namespace WpfApp3.DB
 {
@@ -29,7 +31,7 @@ namespace WpfApp3.DB
             return Conn;
         }
 
-        public void userInsertData(string user_id, string user_password, string user_name, string user_email, string user_tel, string user_auth)//, string user_info
+        public void userInsertData(string user_id, string user_password, string user_name, string user_email, string user_tel, string user_auth, string user_info)
         {
             try
             {
@@ -44,7 +46,6 @@ namespace WpfApp3.DB
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
 
                     string sequence_id = rdr1[0].ToString();
-                    string user_info = "관리자";
                     string cre_date = DateTime.Now.ToString("yyyy-MM-dd");
                     rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
 
@@ -108,11 +109,12 @@ namespace WpfApp3.DB
             return err;
         }
 
+        public UserInfo _UserInfoView;
         // 로그인 검증
         public string[] userLoginChk(string userId, string userPwd)
         {
-            string[] login = {"", "", ""};
-
+            string[] login = {"", "", "", ""};
+            
             try
             {
                 using (conn = new MySqlConnection(dbInfo()))
@@ -120,7 +122,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "select user_name, sequence_id, user_auth from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
+                    string sql1 = "select user_name, sequence_id, user_auth, user_info from members where user_id = '" + userId + "' and user_password = '" + userPwd + "';";
 
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
@@ -129,13 +131,12 @@ namespace WpfApp3.DB
                     string user_name = rdr1[0].ToString();
                     string user_seq = rdr1[1].ToString();
                     string user_auth = rdr1[2].ToString();
+                    string user_info = rdr1[3].ToString();
 
                     login[0] = user_name;
                     login[1] = user_seq;
                     login[2] = user_auth;
-
-                    //COALESCE(sequence_id, '');
-
+                    login[3] = user_info;
                     rdr1.Close();   // 연결 종료
                 }
             }

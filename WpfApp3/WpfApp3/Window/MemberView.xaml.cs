@@ -8,6 +8,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -94,6 +95,16 @@ namespace WpfApp3.Window
                                 member.user_auth = reader["user_auth"].ToString();
                                 member.cre_date = reader["cre_date"].ToString();
                                 member.user_info = reader["user_info"].ToString();
+
+                                if (member.user_info == "승인")
+                                    member.selected_user_info = "승인";
+                                else if (member.user_info == "승인요청")
+                                    member.selected_user_info = "승인요청";
+                                else if (member.user_info == "승인거절")
+                                    member.selected_user_info = "승인거절";
+                                else
+                                    member.selected_user_info = null; // 기본값 설정
+
 
                                 MemberList.Add(member);
                             }

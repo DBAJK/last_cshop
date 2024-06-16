@@ -10,7 +10,9 @@ namespace WpfApp3.Model
     {
         public string UserName { get; set; }
         public string UserSeq { get; set; }
-
         public string authData { get; set; }
+
+        public string userInfo { get; set; }
+
     }
 }

@@ -128,12 +128,12 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
-                    <TextBlock HorizontalAlignment="Center" Margin="320 0 0 0" FontSize="16" 
-                               Foreground="#FF378CE7" FontFamily="Arial Black">NUMBER</TextBlock>
-                    <TextBox x:Name="xRegUserNumber" Padding="10" Margin="0 4 0 10"
+                    <TextBlock HorizontalAlignment="Center" Margin="330 0 0 0" FontSize="16" 
+                               Foreground="#FF378CE7" FontFamily="Arial Black">PHONE</TextBlock>
+                    <TextBox x:Name="xRegUserNumber" Padding="10"
                         FontSize="16" Foreground="#ff424242"
                         TextAlignment="Left"
-                        VerticalContentAlignment="Center" HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Left" Width="400" Height="50"
                         Text="{Binding RegUserNumber}"
                         PreviewTextInput="xRegUserNumber_PreviewTextInput"
