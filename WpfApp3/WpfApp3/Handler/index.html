@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>지도 생성하기</title>
+</head>
+<body>
+    <!-- 지도를 표시할 div 입니다 -->
+    <div id="map" style="width: 500px; height: 400px"></div>
+
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d502ef8977e585cc483511208b13312e"></script>
+    <script>
+      var container = document.getElementById("map");
+      var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3,
+      };
+
+      var map = new kakao.maps.Map(container, options);
+    </script>
+</body>
+</html>

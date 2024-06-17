@@ -41,7 +41,8 @@
 
 
             <Grid Grid.Column="1">
-                <WebBrowser  Name="kakaoMapB" Margin="10" Source="https://dbajk.github.io/c_API_kakao/"/>
+
+                <WebBrowser Name="kakaoMapB" Margin="10" Source="https://dbajk.github.io/c_API_kakao/" />
             </Grid>
         </Grid>
     </Grid>

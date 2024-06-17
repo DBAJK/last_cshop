@@ -21,6 +21,8 @@ using System.IO;
 using System.Net;
 using WpfApp3.Window;
 using System.Windows.Forms;
+using System.Web.Script.Serialization;
+
 //using System.Windows.Forms;
 
 
@@ -85,9 +87,14 @@ namespace WpfApp3.Views
             InitializeComponent();
 
             ViewModel = new KakaoAPIViewModel(this);
+
             this.DataContext = ViewModel;
 
             authDataChk();
+
+           //지도 주석
+            //kakaoMapB.Source = new Uri("https://127.0.0.1:1234/");
+
         }
 
         // --!******** 회원관리 버튼 관리자에게 보이게 하기
@@ -109,7 +116,7 @@ namespace WpfApp3.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            List<MyLocale> mls = KakaoAPIS.Search(tbox_query.Text);
+            List<MyLocale> mls = KakaoAPI.Search(tbox_query.Text);
             lbox_locale.ItemsSource = mls;
         }
 
@@ -121,11 +128,42 @@ namespace WpfApp3.Views
             }
             MyLocale ml = lbox_locale.SelectedItem as MyLocale;
             object[] ps = new object[] { ml.Lat, ml.Lng };
-            HtmlDocument hdoc = (HtmlDocument)kakaoMapB.Document;
+            kakaoMapB.InvokeScript("setCenter", ps);
+            /*HtmlDocument hdoc = (HtmlDocument)kakaoMapB.Document;
 
-            hdoc.InvokeScript("setCenter", ps);
+            hdoc.InvokeScript("setCenter", ps);*/
         }
 
+
+        internal static List<MyLocale> Search(string query)
+        {
+            List<MyLocale> mls = new List<MyLocale>();
+            string site = "https://dapi.kakao.com/v2/local/search/keyword.json";
+            string rquery = string.Format("{0}?query={1}", site, query);
+            WebRequest request = WebRequest.Create(rquery);
+            string rkey = "bd419e294343736f22452d5ee0d2309a";
+            string header = "KakaoAK " + rkey;
+            request.Headers.Add("Authorization", header);
+
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+            String json = reader.ReadToEnd();
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic dob = js.Deserialize<dynamic>(json);
+            dynamic docs = dob["documents"];
+            object[] buf = docs;
+            int length = buf.Length;
+            for (int i = 0; i < length; i++)
+            {
+                string lname = docs[i]["place_name"];
+                double x = double.Parse(docs[i]["x"]);
+                double y = double.Parse(docs[i]["y"]);
+                mls.Add(new MyLocale(lname, y, x));
+            }
+            return mls;
+        }
 
 
         /*private void Button_Click(object sender, RoutedEventArgs e)
