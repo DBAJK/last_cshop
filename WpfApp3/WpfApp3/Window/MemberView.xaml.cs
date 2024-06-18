@@ -97,11 +97,11 @@ namespace WpfApp3.Window
                                 member.user_info = reader["user_info"].ToString();
 
                                 if (member.user_info == "승인")
-                                    member.selected_user_info = "승인";
+                                    member.user_info = "승인";
                                 else if (member.user_info == "승인요청")
-                                    member.selected_user_info = "승인요청";
+                                    member.user_info = "승인요청";
                                 else if (member.user_info == "승인거절")
-                                    member.selected_user_info = "승인거절";
+                                    member.user_info = "승인거절";
                                 else
                                     member.selected_user_info = null; // 기본값 설정
 
