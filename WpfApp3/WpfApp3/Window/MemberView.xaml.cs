@@ -102,6 +102,8 @@ namespace WpfApp3.Window
                                     member.user_info = "승인요청";
                                 else if (member.user_info == "승인거절")
                                     member.user_info = "승인거절";
+                                else
+                                    member.selected_user_info = null; // 기본값 설정
 
 
                                 MemberList.Add(member);
