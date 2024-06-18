@@ -185,3 +185,5 @@ D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Security.Principal.Windows.dll
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Data.SqlClient.xml
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\System.Security.Principal.Windows.xml
 D:\project\GIT\WpfApp3\WpfApp3\bin\Debug\HTTP Server.core.dll
+D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\ComplaintApply.g.cs
+D:\project\GIT\WpfApp3\WpfApp3\obj\Debug\Window\ComplaintApply.baml

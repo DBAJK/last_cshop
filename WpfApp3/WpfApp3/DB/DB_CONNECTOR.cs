@@ -6,12 +6,14 @@ using System.Data;
 using System.Data.Entity.Spatial;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp3.Model;
+using WpfApp3.Views;
 
 namespace WpfApp3.DB
 {
@@ -199,5 +201,70 @@ namespace WpfApp3.DB
 
         }*/
 
+        public KakaoAPI _kakaoAPIView;
+        public string[] complaintListChk(string userId, double lng, double lat)
+        {
+            string[] cpList = { "","","","","","" } ;
+
+            try
+            {
+                using (conn = new MySqlConnection(dbInfo()))
+                {
+                    conn.Open();
+
+                    // 중복 ID 조회
+                    string sql1 = "select complaints_key, cp_contents, cp_region, cp_date, cp_state from complaints " +
+                        "where sequence_id = '" + userId + "' and CP_LNG = '" + lng + "' and CP_LAT = '" + lat + "';";
+
+                    MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                    MySqlDataReader rdr1 = cmd1.ExecuteReader();
+                    rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
+
+                    string complaints_key = rdr1[0].ToString();
+                    string cp_contents = rdr1[1].ToString();
+                    string cp_region = rdr1[2].ToString();
+                    string cp_date = rdr1[3].ToString();
+                    string cp_state = rdr1[4].ToString();
+
+                    cpList[0] = complaints_key;
+                    cpList[1] = cp_contents;
+                    cpList[2] = cp_region;
+                    cpList[3] = cp_date;
+                    cpList[4] = cp_state;
+                    rdr1.Close();   // 연결 종료
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            return cpList;
+        }
+
+        public void complaintDatainsert(string userid, string ContentTextBox, string RegionTextBox, string DatePicker, string StatusData, string FinalDateBox, double lng, double lat)
+        {          
+            try
+            {
+                using (conn = new MySqlConnection(dbInfo()))
+                {
+                    conn.Open();
+
+                    // user_seq 조회
+                    string sql1 = "select COALESCE(max(complaints_key), 0) + 1 from complaints;";
+                    MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                    MySqlDataReader rdr1 = cmd1.ExecuteReader();
+                    rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
+
+                    string complaints_key = rdr1[0].ToString();
+                    rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
+
+                    string sql2 = "insert into complaints values('" + userid + "','" + complaints_key + "','" + ContentTextBox + "','" + RegionTextBox + "', '" + DatePicker + "', '" + StatusData + "', '" +
+                            FinalDateBox + "', '" + lng + "', '" + lat  + "');";
+                    MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+                    cmd2.ExecuteNonQuery();
+                    MessageBox.Show("입력 성공");
+
+                    conn.Close();   // 연결 종료
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

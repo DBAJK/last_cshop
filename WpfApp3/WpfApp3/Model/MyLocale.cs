@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp3.Handler;
 
 namespace WpfApp3
 {
-    class MyLocale
+    public class MyLocale : Notifier
     {
         public string Name { get; set; }
         public double Lat { get; set; }

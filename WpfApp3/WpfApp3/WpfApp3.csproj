@@ -147,17 +147,19 @@
     <Compile Include="DB\DB_CONNECTOR.cs" />
     <Compile Include="ENCRYPTION\SHA256_ENCRYP.cs" />
     <Compile Include="Handler\GlobalVariable.cs" />
-    <Compile Include="Handler\KakaoMapService.cs" />
-    <Compile Include="Handler\LocationContext.cs" />
     <Compile Include="Handler\RelayCommand.cs" />
     <Compile Include="Handler\Notifier.cs" />
-    <Compile Include="Handler\MyLocale.cs" />
+    <Compile Include="Model\MyLocale.cs" />
     <Compile Include="Model\FriendInfo.cs" />
     <Compile Include="Model\LoginInfo.cs" />
     <Compile Include="Model\MemberInfo.cs" />
+    <Compile Include="Model\MyLocaleList.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Views\FriendInfoView.xaml.cs">
       <DependentUpon>FriendInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\ComplaintApply.xaml.cs">
+      <DependentUpon>ComplaintApply.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window\KakaoAPI.xaml.cs">
       <DependentUpon>KakaoAPI.xaml</DependentUpon>
@@ -184,6 +186,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\FriendInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\ComplaintApply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

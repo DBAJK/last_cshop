@@ -22,6 +22,8 @@ using System.Net;
 using WpfApp3.Window;
 using System.Windows.Forms;
 using System.Web.Script.Serialization;
+using System.Runtime.InteropServices;
+using System.Web.UI;
 
 //using System.Windows.Forms;
 
@@ -48,6 +50,12 @@ namespace WpfApp3.Views
             get { return _MemberTableCommand ?? (_MemberTableCommand = new RelayCommand(OnGoMemberTable)); }
         }
 
+        private RelayCommand _UserComplaint;
+        public RelayCommand UserComplaint
+        {
+            get { return _UserComplaint ?? (_UserComplaint = new RelayCommand(OnGoComplaint)); }
+        }
+
 
         public KakaoAPIViewModel(KakaoAPI view)
         {
@@ -71,7 +79,13 @@ namespace WpfApp3.Views
 
             _View.Close();
         }
-            }
+        public void OnGoComplaint(object obj)
+        {
+            new ComplaintApply().Show();
+            
+            System.Windows.MessageBox.Show("민원 화면으로 이동합니다.");
+        }
+    }
     public partial class KakaoAPI
     {
         private KakaoAPI _View;
@@ -92,9 +106,6 @@ namespace WpfApp3.Views
 
             authDataChk();
 
-           //지도 주석
-            //kakaoMapB.Source = new Uri("https://127.0.0.1:1234/");
-
         }
 
         // --!******** 회원관리 버튼 관리자에게 보이게 하기
@@ -106,10 +117,12 @@ namespace WpfApp3.Views
             if (authData == "admin")
             {
                 xAdminView.Visibility = Visibility.Visible;
+                xUserView.Visibility = Visibility.Hidden;
             }
             else
             {
                 xAdminView.Visibility = Visibility.Hidden;
+                xUserView.Visibility = Visibility.Visible;
             }
         }
         // --!********
@@ -128,10 +141,11 @@ namespace WpfApp3.Views
             }
             MyLocale ml = lbox_locale.SelectedItem as MyLocale;
             object[] ps = new object[] { ml.Lat, ml.Lng };
-            kakaoMapB.InvokeScript("setCenter", ps);
-            /*HtmlDocument hdoc = (HtmlDocument)kakaoMapB.Document;
+            GlobalVariable._instance.myLocale.Lng = ml.Lng ;
+            GlobalVariable._instance.myLocale.Lat = ml.Lat ;
+            GlobalVariable._instance.myLocale.Name = ml.Name;
 
-            hdoc.InvokeScript("setCenter", ps);*/
+            kakaoMapB.InvokeScript("setCenter", ps);
         }
 
 
@@ -165,34 +179,5 @@ namespace WpfApp3.Views
             return mls;
         }
 
-
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _LoginView.xLoginView.Visibility = Visibility.Visible;
-            _View.xMapView.Visibility = Visibility.Hidden;
-        }*/
-        /*private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (listBox.SelectedIndex != -1)
-            {
-                return;
-            }
-            Locale ml = listBox.SelectedItem as Locale;
-            object[] pos = new object[] { ml.Lat, ml.Lng };
-            HtmlDocument hdoc = webBrowser.Document;
-            hdoc.InvokeScript("setCenter", pos);
-        }*/
     }
 }

@@ -32,6 +32,7 @@ namespace WpfApp3
         public LoginView LoginWin = null;
         public LoginInfo loginInfo = new LoginInfo();
         public UserInfo userInfo = new UserInfo();
+        public MyLocaleList myLocale = new MyLocaleList();
         #endregion [ Field ]
 
         public GlobalVariable()
