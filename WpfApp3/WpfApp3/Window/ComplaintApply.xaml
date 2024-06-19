@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3.Window"
         mc:Ignorable="d"
-        Title="ComplaintApply" Height="450" Width="600">
+        Title="ComplaintApply" Height="450" Width="800">
+
     <Grid>
         <!--<Grid>
             <Grid.RowDefinitions>
@@ -23,50 +24,110 @@
             </Grid>
 
         </Grid>-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Text="민원 페이지" HorizontalAlignment="Left" Grid.Row="0"
+        <Grid x:Name="xUserComplaintView">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="민원 페이지" HorizontalAlignment="Left" Grid.Row="0"
                         FontSize="55" VerticalAlignment="Center" FontWeight="Bold" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-            <TextBlock Text="민원 내용 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
-            <TextBox x:Name="ContentTextBox" Width="300" Height="35" FontSize="15" Text="{Binding xContentTextBox}"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                <TextBlock Text="민원 내용 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
+                <TextBox x:Name="ContentTextBox" Width="300" Height="35" FontSize="15" Text="{Binding xContentTextBox}"/>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10">
-            <TextBlock Text="민원 지역 :" Width="100" FontSize="15" VerticalAlignment="Center" />
-            <TextBox x:Name="RegionTextBox" Width="300" Height="35" FontSize="15" Text="{Binding xRegionTextBox}"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10">
+                <TextBlock Text="민원 지역 :" Width="100" FontSize="15" VerticalAlignment="Center" />
+                <TextBox x:Name="RegionTextBox" Width="300" Height="35" FontSize="15" Text="{Binding xRegionTextBox}"/>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10">
-            <TextBlock Text="민원 날짜 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
-            <TextBox x:Name="DatePicker" Width="300" Height="35" FontSize="15" Text="{Binding xDatePicker}"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10">
+                <TextBlock Text="민원 날짜 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
+                <TextBox x:Name="DatePicker" Width="300" Height="35" FontSize="15"
+                    IsEnabled="False"
+                    Text="{Binding xDatePicker}"/>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="10">
-            <TextBlock Text="민원 상태 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
-            <ComboBox x:Name="StatusComboBox" Width="300" Height="35" FontSize="15">
-                <ComboBoxItem Content="처리중"/>
-                <ComboBoxItem Content="대기중"/>
-                <ComboBoxItem Content="완료"/>
-            </ComboBox>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="10" x:Name="userApplyFirst">
+                <TextBlock Text="민원 상태 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
+                <ComboBox x:Name="StatusComboBox" Width="300" Height="35" FontSize="15" SelectedItem="{Binding xStatusComboBox}">
+                    <ComboBoxItem Content="신청"/>
+                    <ComboBoxItem Content="처리중"/>
+                    <ComboBoxItem Content="완료"/>
+                </ComboBox>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="5" Margin="10">
-            <TextBlock Text="처리 일자 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
-            <TextBox x:Name="FinalDateBox" Width="300" Height="35" FontSize="15" Text="{Binding xFinalDateBox}"/>
-        </StackPanel>
+            <!--<StackPanel Orientation="Horizontal" Grid.Row="5" Margin="10" >
+                <TextBlock Text="처리 일자 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
+                <TextBox x:Name="FinalDateBox" Width="300" Height="35" FontSize="15" Text="{Binding xFinalDateBox}"/>
+            </StackPanel>-->
         
-        <Button Content="저장" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                Margin="10" Width="100" Height="30" Grid.Row="6" Command="{Binding ComplaintsSaveBtn}"/>
+            <Button Content="저장" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                    Margin="10" Width="100" Height="30" Grid.Row="6" Command="{Binding ComplaintsSaveBtn}"/>
+        </Grid>
 
+        <Grid x:Name="xAdminComplaintView" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="민원 페이지" HorizontalAlignment="Left" Grid.Row="0"
+                        FontSize="55" VerticalAlignment="Center" FontWeight="Bold" />
+
+
+                <Button Grid.Column="1" Content="저장하기" FontSize="35" Command="{Binding complaintUpdate}"/>
+
+            </Grid>
+
+            <DataGrid Grid.Row="1" 
+                      AutoGenerateColumns="False"
+                      HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding ComplaintsList}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontFamily" Value="Arial Black"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontFamily" Value="Arial"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="민원 내용" Binding="{Binding Path=cp_contents}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="민원 지역" Binding="{Binding Path=cp_region}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="민원 날짜" Binding="{Binding Path=cp_date}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="민원 상태" Binding="{Binding Path=cp_state}" Width="*" />
+                    <DataGridTextColumn Header="처리 일자" Binding="{Binding Path=cpl_date}" Width="*" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="상태" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox  SelectedItem="{Binding cp_stateItem}">
+                                    <ComboBoxItem Content="신청"/>
+                                    <ComboBoxItem Content="처리중"/>
+                                    <ComboBoxItem Content="완료"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

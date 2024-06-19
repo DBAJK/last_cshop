@@ -81,14 +81,22 @@ namespace WpfApp3.Views
         }
         public void OnGoComplaint(object obj)
         {
-            new ComplaintApply().Show();
-            
-            System.Windows.MessageBox.Show("민원 화면으로 이동합니다.");
+            double lng = GlobalVariable._instance.myLocale.Lng;
+            double lat = GlobalVariable._instance.myLocale.Lat;
+            string authData = GlobalVariable._instance.userInfo.authData;
+            if(authData == "admin" || (lng != 0 && lat != 0)) { 
+                System.Windows.MessageBox.Show("민원 화면으로 이동합니다.");
+                new ComplaintApply().Show();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("민원 위치를 선정해주세요.");
+            }
         }
     }
     public partial class KakaoAPI
     {
-        private KakaoAPI _View;
+        public KakaoAPI _View;
         private KakaoAPIViewModel _viewModel;
         private LoginView _LoginView;
         private LoginViewModel _LoginChk;
@@ -105,8 +113,13 @@ namespace WpfApp3.Views
             this.DataContext = ViewModel;
 
             authDataChk();
-
         }
+
+        public void callCSharpMethod(double lat, double lng)
+        {
+            System.Windows.MessageBox.Show("Lat: " + lat + ", Lng: " + lng);
+        }
+
 
         // --!******** 회원관리 버튼 관리자에게 보이게 하기
         public void authDataChk()
@@ -117,12 +130,10 @@ namespace WpfApp3.Views
             if (authData == "admin")
             {
                 xAdminView.Visibility = Visibility.Visible;
-                xUserView.Visibility = Visibility.Hidden;
             }
             else
             {
                 xAdminView.Visibility = Visibility.Hidden;
-                xUserView.Visibility = Visibility.Visible;
             }
         }
         // --!********
@@ -178,6 +189,5 @@ namespace WpfApp3.Views
             }
             return mls;
         }
-
     }
 }

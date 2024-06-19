@@ -20,6 +20,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Net.Http;
+using MySql.Data.MySqlClient;
 
 namespace WpfApp3.Views
 {
