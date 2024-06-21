@@ -346,20 +346,6 @@ namespace WpfApp3.Views
             
             return _userInfo[0].Length > 0;
         }
-/*
-        private static readonly HttpClient client = new HttpClient();
-        private async void SendDataButton_Click(object sender, RoutedEventArgs e)
-        {
-            var data = new { Name = "John", Age = 30 };
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await client.PostAsync("http://localhost:3000/api/data", content);
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            MessageBox.Show(responseString);
-        }
-*/
     }
 
     /// <summary>
@@ -376,17 +362,6 @@ namespace WpfApp3.Views
             ViewModel = new LoginViewModel(this);
             this.DataContext = ViewModel;
         }
-
-
-
-        /*public String OnGetFullEmailClick()
-        {
-            string regUserEmail = xRegUserEmail.Text;
-            string selectedEmailAdd = xEmailAddComboBox.SelectedItem?.ToString();
-            string fullEmail = $"{regUserEmail}@{selectedEmailAdd}";
-
-            return fullEmail;
-        }*/
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

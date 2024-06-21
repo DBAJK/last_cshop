@@ -24,8 +24,11 @@ namespace WpfApp3.Model
             get { return _selected_user_info; }
             set
             {
-                _selected_user_info = value;
-                OnPropertyChange("selected_user_info");
+                if (_selected_user_info != value)
+                {
+                    _selected_user_info = value;
+                    OnPropertyChange(nameof(selected_user_info));
+                }
             }
         }
     }

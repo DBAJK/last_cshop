@@ -54,7 +54,7 @@ namespace WpfApp3.DB
                     // 데이터 임시 등록
                     //string sql2 = "insert into members values('" + userId+"','"+userPwd+"', '"+userName+"', "+ user_seq + ");";
                     string sql2 = "insert into members values('" + sequence_id + "','" + user_id+"','"+ user_password +"', '"+ user_name +"', '"+ user_email+ "', '" +
-                            user_tel  + "', '" + user_info + "', '" + user_auth + "', '" + cre_date + "');";
+                            user_tel  + "',  DEFAULT, '" + user_auth + "', '" + cre_date + "');";
                     MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                     cmd2.ExecuteNonQuery();
                     MessageBox.Show("입력 성공");
@@ -129,7 +129,7 @@ namespace WpfApp3.DB
             return login;
         }
 
-        public void UserNameChangeUpdate(string userSeq, string userName)
+        public void UserNameChangeUpdate(string userSeq, string user_info)
         {
             try
             {
@@ -138,7 +138,7 @@ namespace WpfApp3.DB
                     conn.Open();
 
                     // 중복 ID 조회
-                    string sql1 = "update members set user_name = '" + userName+"' where sequence_id = "+userSeq;
+                    string sql1 = "update members set user_info = '" + user_info + "' where sequence_id = "+userSeq;
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     MySqlDataReader rdr1 = cmd1.ExecuteReader();
                     rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
@@ -234,7 +234,7 @@ namespace WpfApp3.DB
         }
 
 
-        public void complaintDatainsert(string userid, string ContentTextBox, string RegionTextBox, string DatePicker, string StatusData, double lng, double lat)
+        public void complaintDatainsert(string userid, string userName, string ContentTextBox, string RegionTextBox, string DatePicker, string StatusData, double lng, double lat)
         {          
             try
             {
@@ -250,10 +250,10 @@ namespace WpfApp3.DB
 
                     string complaints_key = rdr1[0].ToString();
                     string FinalDateBox = "2000-00-00";
-                    StatusData = "신청";
+                    StatusData = "";
                     rdr1.Close(); // DataReader Read 시작 했으면 끝나고 close 무조건 해줘야됨
 
-                    string sql2 = "insert into complaints values('" + userid + "','" + complaints_key + "','" + ContentTextBox + "','" + RegionTextBox + "', '" + DatePicker + "', '" + StatusData + "', '" +
+                    string sql2 = "insert into complaints values('" + userid + "','" + complaints_key + "','" + userName + "','" + ContentTextBox + "','" + RegionTextBox + "', '" + DatePicker + "',  DEFAULT, '" +
                             FinalDateBox + "', '" + lng + "', '" + lat  + "');";
                     MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
                     cmd2.ExecuteNonQuery();
@@ -264,5 +264,48 @@ namespace WpfApp3.DB
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+        public void complaintDataUpdate(string complaintsKey, string userid, string xContentTextBox)
+        {
+            try
+            {
+                using (conn = new MySqlConnection(dbInfo()))
+                {
+                    conn.Open();
+
+                    // 중복 ID 조회
+                    string sql1 = "update complaints set cp_contents = '" + xContentTextBox + "' where sequence_id = '" + userid + 
+                        "'and complaints_key = '" + complaintsKey + "';";
+                    MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                    MySqlDataReader rdr1 = cmd1.ExecuteReader();
+                    rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
+
+                    conn.Close();   // 연결 종료
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        public void complaintAdminUpdate(string complaintsKey, string cp_stateItem)
+        {
+            try
+            {
+                using (conn = new MySqlConnection(dbInfo()))
+                {
+                    conn.Open();
+                    string cpl_date = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    string sql1 = "update complaints set cp_state = '" + cp_stateItem + "', cpl_date = '" + cpl_date + "' where complaints_key = '" + complaintsKey + "';";
+                    MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                    MySqlDataReader rdr1 = cmd1.ExecuteReader();
+                    rdr1.Read(); // 첫번째 값을 가져와야 되기 때문에 한번만 실행
+
+                    conn.Close();   // 연결 종료
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+
+
     }
+
 }

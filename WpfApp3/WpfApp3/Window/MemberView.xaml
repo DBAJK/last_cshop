@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         d:DesignHeight="839" d:DesignWidth="1448"
         >
+
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -18,11 +19,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3.5*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="회원 관리 페이지" HorizontalAlignment="Left" 
                         FontSize="55" VerticalAlignment="Center" FontWeight="Bold" />
-
-                <Button Grid.Column="1" Content="뒤로가기" FontSize="40" Command="{Binding AuthorityCommand}"/>
+                <Button Grid.Column="1" Content="저장하기" FontSize="35" Command="{Binding MemeberDataSave}"/>
+                <Button Grid.Column="2" Content="뒤로가기" FontSize="40" Command="{Binding AuthorityCommand}"/>
 
             </Grid>
 
@@ -57,9 +59,11 @@
                     <DataGridTemplateColumn Header="상태" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox  SelectedItem="{Binding user_info}">
+                                <ComboBox SelectedValue="{Binding selected_user_info, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedItem="{Binding user_info}"
+                                          SelectedValuePath="Content">
                                     <ComboBoxItem Content="승인"/>
-                                    <ComboBoxItem Content="승인요청"/>
+                                    <ComboBoxItem Content="승인신청"/>
                                     <ComboBoxItem Content="승인거절"/>
                                 </ComboBox>
                             </DataTemplate>

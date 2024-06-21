@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.Compiler;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,8 +8,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,37 +53,50 @@ namespace WpfApp3.Window
             get { return _AuthorityCommand ?? (_AuthorityCommand = new RelayCommand(OnBackBtn)); }
         }
 
+        private RelayCommand _MemeberDataSave;
+        public RelayCommand MemeberDataSave
+        {
+            get { return _MemeberDataSave ?? (_MemeberDataSave = new RelayCommand(OnMemberDataSave)); }
+        }
+
+
         public MemberViewModel(MemberView view)
         {
             _View = view;
             MemberList = new ObservableCollection<MemberInfo>();
-
             dbConnect = new DB_CONNECTOR();
 
             LoadMembers();
         }
 
+        private string _user_info;
+
+        public string user_info
+        {
+            get { return _user_info; }
+            set
+            {
+                _user_info = value;
+                OnPropertyChange(nameof(user_info));
+            }
+        }
         public void OnBackBtn(object obj)
         {
             new KakaoAPI().Show();
-
+            GlobalVariable._instance.myLocale.Name = "";
+            GlobalVariable._instance.myLocale.Lng = 0;
+            GlobalVariable._instance.myLocale.Lat = 0;
             _View.Close();
-
         }
         public void LoadMembers()
         {
             this.MemberList.Clear();
-
             try
             {
                 using (MySqlConnection conn = dbConnect.MemberViewConn())
                 {
                     conn.Open();
-                    string query = "SELECT sequence_id, user_name, user_id, user_email, user_tel, user_auth, cre_date, user_info FROM members;"; // your_table_name을 실제 테이블 이름으로 변경하세요
-                    //MySqlCommand cmd = new MySqlCommand(query, conn);
-                    //MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                    //DataTable dt = new DataTable();
-                    //adapter.Fill(dt);
+                    string query = "SELECT sequence_id, user_name, user_id, user_email, user_tel, user_auth, cre_date, user_info FROM members;"; 
                     
                     using (var cmd = new MySqlCommand(query, conn))
                     {
@@ -95,16 +113,7 @@ namespace WpfApp3.Window
                                 member.user_auth = reader["user_auth"].ToString();
                                 member.cre_date = reader["cre_date"].ToString();
                                 member.user_info = reader["user_info"].ToString();
-
-                                if (member.user_info == "승인")
-                                    member.user_info = "승인";
-                                else if (member.user_info == "승인요청")
-                                    member.user_info = "승인요청";
-                                else if (member.user_info == "승인거절")
-                                    member.user_info = "승인거절";
-                                else
-                                    member.selected_user_info = null; // 기본값 설정
-
+                                member.selected_user_info = member.user_info;
 
                                 MemberList.Add(member);
                             }
@@ -118,6 +127,34 @@ namespace WpfApp3.Window
             }
 
         }
+
+        public ObservableCollection<MemberInfo> members { get; set; }
+
+        public void OnMemberDataSave(object obj)
+        {
+            DB_CONNECTOR db = new DB_CONNECTOR();
+            foreach (var list in MemberList)
+            {
+                db.UserNameChangeUpdate(list.sequence_id, list.selected_user_info);
+            }
+            System.Windows.MessageBox.Show("수정되었습니다.");
+            new KakaoAPI().Show();
+
+            _View.Close();
+        }
+    }
+
+
+public class MemberDataView : ObservableObject
+    {
+        private MemberView _View;
+
+        public MemberViewModel ViewModel = null;
+        private IList<MemberInfo> _memberInfo = new List<MemberInfo>
+        {
+
+        };
+        public IList<MemberInfo> Persons { get { return _memberInfo; } }
     }
 
     public partial class MemberView

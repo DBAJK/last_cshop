@@ -140,8 +140,15 @@ namespace WpfApp3.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            List<MyLocale> mls = KakaoAPI.Search(tbox_query.Text);
-            lbox_locale.ItemsSource = mls;
+            if(tbox_query != null && !string.IsNullOrEmpty(tbox_query.Text)) { 
+                List<MyLocale> mls = KakaoAPI.Search(tbox_query.Text);
+                lbox_locale.ItemsSource = mls;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("민원 신청하실 장소를 입력해주세요.");
+
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -155,7 +162,7 @@ namespace WpfApp3.Views
             GlobalVariable._instance.myLocale.Lng = ml.Lng ;
             GlobalVariable._instance.myLocale.Lat = ml.Lat ;
             GlobalVariable._instance.myLocale.Name = ml.Name;
-
+            
             kakaoMapB.InvokeScript("setCenter", ps);
         }
 

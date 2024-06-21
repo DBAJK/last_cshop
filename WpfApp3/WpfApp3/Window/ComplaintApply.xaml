@@ -8,23 +8,8 @@
         Title="ComplaintApply" Height="450" Width="800">
 
     <Grid>
-        <!--<Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".2*"/>
-                <RowDefinition Height="*"/>
-
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3.5*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="민원 페이지" HorizontalAlignment="Left" 
-                        FontSize="55" VerticalAlignment="Center" FontWeight="Bold" />
-            </Grid>
-
-        </Grid>-->
-        <Grid x:Name="xUserComplaintView">
+        <Grid x:Name="xUserComplaintView" >
+            <!-- 민원인 권한 그리드 -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -56,7 +41,10 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="10" x:Name="userApplyFirst">
                 <TextBlock Text="민원 상태 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
-                <ComboBox x:Name="StatusComboBox" Width="300" Height="35" FontSize="15" SelectedItem="{Binding xStatusComboBox}">
+                <ComboBox x:Name="StatusComboBox" Width="300" Height="35" FontSize="15" 
+                          SelectedValue="{Binding selected_cp_stateItem}"
+                          SelectedItem="{Binding cp_stateItem}"
+                          SelectedValuePath="Content" IsEnabled="False">
                     <ComboBoxItem Content="신청"/>
                     <ComboBoxItem Content="처리중"/>
                     <ComboBoxItem Content="완료"/>
@@ -67,12 +55,15 @@
                 <TextBlock Text="처리 일자 :" Width="100" FontSize="15" VerticalAlignment="Center"/>
                 <TextBox x:Name="FinalDateBox" Width="300" Height="35" FontSize="15" Text="{Binding xFinalDateBox}"/>
             </StackPanel>-->
-        
+
             <Button Content="저장" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                     Margin="10" Width="100" Height="30" Grid.Row="6" Command="{Binding ComplaintsSaveBtn}"/>
         </Grid>
 
-        <Grid x:Name="xAdminComplaintView" Visibility="Hidden">
+        <!-- ************************************ -->
+
+        <Grid x:Name="xAdminComplaintView"  Visibility="Hidden">
+            <!-- 관리자 권한 그리드 -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -81,12 +72,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3.5*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="민원 페이지" HorizontalAlignment="Left" Grid.Row="0"
                         FontSize="55" VerticalAlignment="Center" FontWeight="Bold" />
 
 
                 <Button Grid.Column="1" Content="저장하기" FontSize="35" Command="{Binding complaintUpdate}"/>
+                <Button Grid.Column="2" Content="뒤로가기" FontSize="35" Command="{Binding backPageView}"/>
 
             </Grid>
 
@@ -110,15 +103,17 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="민원인" Binding="{Binding Path=user_name}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="민원 내용" Binding="{Binding Path=cp_contents}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="민원 지역" Binding="{Binding Path=cp_region}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="민원 날짜" Binding="{Binding Path=cp_date}" Width="*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="민원 상태" Binding="{Binding Path=cp_state}" Width="*" />
                     <DataGridTextColumn Header="처리 일자" Binding="{Binding Path=cpl_date}" Width="*" IsReadOnly="True"/>
                     <DataGridTemplateColumn Header="상태" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox  SelectedItem="{Binding cp_stateItem}">
+                                <ComboBox SelectedValue="{Binding selected_cp_stateItem, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedItem="{Binding cp_stateItem}"
+                                          SelectedValuePath="Content">
                                     <ComboBoxItem Content="신청"/>
                                     <ComboBoxItem Content="처리중"/>
                                     <ComboBoxItem Content="완료"/>
@@ -129,5 +124,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <!-- ************************************ -->
     </Grid>
 </Window>
